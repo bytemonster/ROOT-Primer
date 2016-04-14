@@ -1,0 +1,523 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{8-ROOT-in-Python}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    ROOT offers the possibility to interface to Python via a set of bindings
+called PyROOT. Python is used in a wide variety of application areas and
+one of the most used scripting languages today. With the help of PyROOT
+it becomes possible to combine the power of a scripting language with
+ROOT tools. Introductory material to Python is available from many
+sources on the web, see e. g. http://docs.python.org.
+
+\subsection{8.1 PyROOT}\label{pyroot}
+
+The access to ROOT classes and their methods in PyROOT is almost
+identical to C++ macros, except for the special language features of
+Python, most importantly dynamic type declaration at the time of
+assignment. Coming back to our first example, simply plotting a function
+in ROOT, the following C++ code:
+
+\begin{verbatim}
+TF1 *f1 = new TF1("f2","[0]*sin([1]*x)/x",0.,10.);
+f1->SetParameter(0,1);
+f1->SetParameter(1,1);
+f1->Draw();
+\end{verbatim}
+
+in Python becomes:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{ROOT}
+\end{Verbatim}
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Welcome to JupyROOT 6.07/05
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}from ROOT import gStyle, TCanvas, TGraphErrors}
+        \PY{n}{canvas\PYZus{}8\PYZus{}1}\PY{o}{=}\PY{n}{ROOT}\PY{o}{.}\PY{n}{TCanvas}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{canvas\PYZus{}8\PYZus{}1}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Data}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,}\PY{l+m+mi}{200} \PY{p}{,}\PY{l+m+mi}{10} \PY{p}{,}\PY{l+m+mi}{700} \PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}
+        \PY{n}{f1} \PY{o}{=} \PY{n}{ROOT}\PY{o}{.}\PY{n}{TF1}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[0]*sin([1]*x)/x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{10.}\PY{p}{)}
+        \PY{n}{f1}\PY{o}{.}\PY{n}{SetParameter}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+        \PY{n}{f1}\PY{o}{.}\PY{n}{SetParameter}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+        \PY{n}{f1}\PY{o}{.}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        \PY{n}{canvas\PYZus{}8\PYZus{}1}\PY{o}{.}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{8-ROOT-in-Python_files/8-ROOT-in-Python_2_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    A slightly more advanced example hands over data defined in the macro to
+the ROOT class TGraphErrors. Note that a Python array can be used to
+pass data between Python and ROOT. The first line in the Python script
+allows it to be executed directly from the operating system, without the
+need to start the script from python or the highly recommended powerful
+interactive shell ipython. The last line in the python script is there
+to allow you to have a look at the graphical output in the ROOT canvas
+before it disappears upon termination of the script.
+
+Here is the C++ version:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{cpp}
+        //
+        // Draw a graph with error bars and fit a function to it
+        //
+        gStyle\PYZhy{}\PYZgt{}SetOptFit(111) ; //superimpose fit results
+        // make nice Canvas
+        auto *c1 = new TCanvas(\PYZdq{}c1\PYZdq{} ,\PYZdq{}Daten\PYZdq{} ,200 ,10 ,700 ,500) ;
+        c1\PYZhy{}\PYZgt{}SetGrid( ) ;
+        //define some data points ...
+        const Int\PYZus{}t n = 10;
+        Float\PYZus{}t x[n] = \PYZob{}\PYZhy{}0.22, 0.1, 0.25, 0.35, 0.5, 0.61, 0.7, 0.85, 0.89, 1.1\PYZcb{};
+        Float\PYZus{}t y[n] = \PYZob{}0.7, 2.9, 5.6, 7.4, 9., 9.6, 8.7, 6.3, 4.5, 1.1\PYZcb{};
+        Float\PYZus{}t ey[n] = \PYZob{}.8 ,.7 ,.6 ,.5 ,.4 ,.4 ,.5 ,.6 ,.7 ,.8\PYZcb{};
+        Float\PYZus{}t ex[n] = \PYZob{}.05 ,.1 ,.07 ,.07 ,.04 ,.05 ,.06 ,.07 ,.08 ,.05\PYZcb{};
+        // and hand over to TGraphErros object
+        TGraphErrors *gr = new TGraphErrors(n,x,y,ex,ey);
+        gr\PYZhy{}\PYZgt{}SetTitle(\PYZdq{}TGraphErrors with Fit\PYZdq{}) ;
+        gr\PYZhy{}\PYZgt{}DrawClone(\PYZdq{}AP\PYZdq{});
+        // now perform a fit (with errors in x and y!)
+        gr\PYZhy{}\PYZgt{}Fit(\PYZdq{}gaus\PYZdq{});
+        c1\PYZhy{}\PYZgt{}Draw();
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+FCN=1.53213 FROM MIGRAD    STATUS=CONVERGED      90 CALLS          91 TOTAL
+                     EDM=2.58725e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  Constant     9.54303e+00   3.54707e-01   2.49013e-04   5.51076e-04
+   2  Mean         5.66472e-01   2.69815e-02   2.04103e-05   4.18957e-03
+   3  Sigma        2.85465e-01   3.04454e-02   2.72043e-05   1.85906e-03
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{8-ROOT-in-Python_files/8-ROOT-in-Python_4_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In Python it looks like this:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} Draw a graph with error bars and fit a function to it}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{k+kn}{from} \PY{n+nn}{ROOT} \PY{k+kn}{import} \PY{n}{gStyle}\PY{p}{,} \PY{n}{TCanvas}\PY{p}{,} \PY{n}{TGraphErrors}
+        \PY{k+kn}{from} \PY{n+nn}{array} \PY{k+kn}{import} \PY{n}{array}
+        \PY{n}{gStyle}\PY{o}{.}\PY{n}{SetOptFit} \PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)} \PY{c+c1}{\PYZsh{} superimpose fit results}
+        \PY{n}{canvas\PYZus{}8\PYZus{}1}\PY{o}{.}\PY{n}{SetGrid} \PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}define some data points . . .}
+        \PY{n}{x} \PY{o}{=} \PY{n}{array}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.22}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.61}\PY{p}{,} \PY{l+m+mf}{0.7}\PY{p}{,} \PY{l+m+mf}{0.85}\PY{p}{,} \PY{l+m+mf}{0.89}\PY{p}{,} \PY{l+m+mf}{1.1}\PY{p}{)} \PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{array}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{l+m+mf}{0.7}\PY{p}{,} \PY{l+m+mf}{2.9}\PY{p}{,} \PY{l+m+mf}{5.6}\PY{p}{,} \PY{l+m+mf}{7.4}\PY{p}{,} \PY{l+m+mf}{9.}\PY{p}{,} \PY{l+m+mf}{9.6}\PY{p}{,} \PY{l+m+mf}{8.7}\PY{p}{,} \PY{l+m+mf}{6.3}\PY{p}{,} \PY{l+m+mf}{4.5}\PY{p}{,} \PY{l+m+mf}{1.1}\PY{p}{)} \PY{p}{)}
+        \PY{n}{ey} \PY{o}{=} \PY{n}{array}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{o}{.}\PY{l+m+mi}{8} \PY{p}{,}\PY{o}{.}\PY{l+m+mi}{7} \PY{p}{,}\PY{o}{.}\PY{l+m+mi}{6} \PY{p}{,}\PY{o}{.}\PY{l+m+mi}{5} \PY{p}{,}\PY{o}{.}\PY{l+m+mi}{4} \PY{p}{,}\PY{o}{.}\PY{l+m+mi}{4} \PY{p}{,}\PY{o}{.}\PY{l+m+mi}{5} \PY{p}{,}\PY{o}{.}\PY{l+m+mi}{6} \PY{p}{,}\PY{o}{.}\PY{l+m+mi}{7} \PY{p}{,}\PY{o}{.}\PY{l+m+mi}{8}\PY{p}{)} \PY{p}{)}
+        \PY{n}{ex} \PY{o}{=} \PY{n}{array}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{o}{.}\PY{l+m+mo}{05} \PY{p}{,}\PY{o}{.}\PY{l+m+mi}{1} \PY{p}{,}\PY{o}{.}\PY{l+m+mo}{07} \PY{p}{,}\PY{o}{.}\PY{l+m+mo}{07} \PY{p}{,}\PY{o}{.}\PY{l+m+mo}{04} \PY{p}{,}\PY{o}{.}\PY{l+m+mo}{05} \PY{p}{,}\PY{o}{.}\PY{l+m+mo}{06} \PY{p}{,}\PY{o}{.}\PY{l+m+mo}{07} \PY{p}{,}\PY{o}{.}\PY{l+m+mi}{08} \PY{p}{,}\PY{o}{.}\PY{l+m+mo}{05}\PY{p}{)} \PY{p}{)}
+        \PY{n}{nPoints}\PY{o}{=}\PY{n+nb}{len} \PY{p}{(} \PY{n}{x} \PY{p}{)}
+        \PY{c+c1}{\PYZsh{} . . . and hand over to TGraphErros object}
+        \PY{n}{gr}\PY{o}{=}\PY{n}{TGraphErrors} \PY{p}{(} \PY{n}{nPoints} \PY{p}{,} \PY{n}{x} \PY{p}{,} \PY{n}{y} \PY{p}{,} \PY{n}{ex} \PY{p}{,} \PY{n}{ey} \PY{p}{)}
+        \PY{n}{gr}\PY{o}{.}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TGraphErrors with Fit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{gr}\PY{o}{.}\PY{n}{Draw} \PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{AP}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)} 
+        \PY{n}{gr}\PY{o}{.}\PY{n}{Fit}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gaus}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+        \PY{n}{canvas\PYZus{}8\PYZus{}1}\PY{o}{.}\PY{n}{Update} \PY{p}{(}\PY{p}{)} 
+        \PY{n}{canvas\PYZus{}8\PYZus{}1}\PY{o}{.}\PY{n}{Draw} \PY{p}{(}\PY{p}{)} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+FCN=1.53213 FROM MIGRAD    STATUS=CONVERGED      88 CALLS          89 TOTAL
+                     EDM=2.57894e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  Constant     9.54303e+00   3.54707e-01   2.49013e-04   5.50385e-04
+   2  Mean         5.66472e-01   2.69815e-02   2.04103e-05   4.18001e-03
+   3  Sigma        2.85465e-01   3.04454e-02   2.72043e-05   1.85849e-03
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{8-ROOT-in-Python_files/8-ROOT-in-Python_6_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Comparing the C++ and Python versions in these two examples, it now
+should be clear how easy it is to convert any ROOT Macro in C++ to a
+Python version.
+
+As another example, let us revisit macro3 from Chapter 4. A
+straight-forward Python version relying on the ROOT class
+\texttt{TMath}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Builds a polar graph in a square Canvas.}
+        
+        \PY{k+kn}{from} \PY{n+nn}{ROOT} \PY{k+kn}{import} \PY{n}{TGraphPolar}\PY{p}{,} \PY{n}{TCanvas}\PY{p}{,} \PY{n}{TMath}
+        \PY{k+kn}{from} \PY{n+nn}{array} \PY{k+kn}{import} \PY{n}{array}
+        
+        \PY{n}{canvas\PYZus{}8\PYZus{}1\PYZus{}sq} \PY{o}{=} \PY{n}{TCanvas}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{canvas\PYZus{}8\PYZus{}1\PYZus{}sq}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{myCanvas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{)}
+        \PY{n}{rmin} \PY{o}{=} \PY{l+m+mf}{0.}
+        \PY{n}{rmax} \PY{o}{=} \PY{n}{TMath}\PY{o}{.}\PY{n}{Pi}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{6.}
+        \PY{n}{npoints} \PY{o}{=} \PY{l+m+mi}{300}
+        \PY{n}{r} \PY{o}{=} \PY{n}{array}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{npoints}\PY{p}{)}
+        \PY{n}{theta}  \PY{o}{=} \PY{n}{array}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{npoints}\PY{p}{)}
+        \PY{k}{for} \PY{n}{ipt} \PY{o+ow}{in} \PY{n+nb}{xrange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{npoints}\PY{p}{)}\PY{p}{:}
+            \PY{n}{r}\PY{p}{[}\PY{n}{ipt}\PY{p}{]} \PY{o}{=} \PY{n}{ipt}\PY{o}{*}\PY{p}{(}\PY{n}{rmax}\PY{o}{\PYZhy{}}\PY{n}{rmin}\PY{p}{)}\PY{o}{/}\PY{n}{npoints}\PY{o}{+}\PY{n}{rmin}
+            \PY{n}{theta}\PY{p}{[}\PY{n}{ipt}\PY{p}{]} \PY{o}{=} \PY{n}{TMath}\PY{o}{.}\PY{n}{Sin}\PY{p}{(}\PY{n}{r}\PY{p}{[}\PY{n}{ipt}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{grP1} \PY{o}{=} \PY{n}{TGraphPolar}\PY{p}{(}\PY{n}{npoints}\PY{p}{,}\PY{n}{r}\PY{p}{,}\PY{n}{theta}\PY{p}{)}
+        \PY{n}{grP1}\PY{o}{.}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A Fan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{grP1}\PY{o}{.}\PY{n}{SetLineWidth}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{grP1}\PY{o}{.}\PY{n}{SetLineColor}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{grP1}\PY{o}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{grP1}\PY{o}{.}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}
+        \PY{n}{canvas\PYZus{}8\PYZus{}1\PYZus{}sq}\PY{o}{.}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{8-ROOT-in-Python_files/8-ROOT-in-Python_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{8.1.1 More Python- less C++}\label{more-python--less-c}
+
+You may have noticed already that there are some Python modules
+providing functionality similar to ROOT classes, which fit more
+seamlessly into your Python code.
+
+A more ``pythonic'' version of the above macro3 would use a replacement
+of the ROOT class TMath for the provisoining of data to TGraphPolar.
+With the math package, the part of the code becomes
+
+\begin{verbatim}
+import math
+from array import array
+from ROOT import TCanvas , TGraphPolar
+...
+ipt=range(0,npoints)
+r=array('d',map(lambda x: x*(rmax-rmin)/(npoints-1.)+rmin,ipt))
+theta=array('d',map(math.sin,r))
+e=array('d',npoints*[0.])
+...
+\end{verbatim}
+
+\paragraph{8.1.1.1 Customised Binning}\label{customised-binning}
+
+This example combines comfortable handling of arrays in Python to define
+variable bin sizes of a ROOT histogram. All we need to know is the
+interface of the relevant ROOT class and its methods (from the ROOT
+documentation):
+
+\begin{verbatim}
+TH1F(const char* name , const char* title , Int_t nbinsx , const Double_t* xbins)
+\end{verbatim}
+
+Here is the Python code:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{import} \PY{n+nn}{ROOT}
+        \PY{k+kn}{from} \PY{n+nn}{array} \PY{k+kn}{import} \PY{n}{array}
+        \PY{n}{canvas\PYZus{}8\PYZus{}1\PYZus{}1} \PY{o}{=} \PY{n}{TCanvas}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{canvas\PYZus{}8\PYZus{}1\PYZus{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{myCanvas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{arrBins} \PY{o}{=} \PY{n}{array}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,}\PY{p}{(}\PY{l+m+mi}{1} \PY{p}{,}\PY{l+m+mi}{4} \PY{p}{,}\PY{l+m+mi}{9} \PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)} \PY{p}{)} \PY{c+c1}{\PYZsh{} array of bin edges}
+        \PY{n}{histogram\PYZus{}8\PYZus{}1} \PY{o}{=} \PY{n}{ROOT}\PY{o}{.}\PY{n}{TH1F}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{histogram\PYZus{}8\PYZus{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{histogram\PYZus{}8\PYZus{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{arrBins}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{arrBins}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} fill it with equally spaced numbers}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{1} \PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)} \PY{p}{:}
+           \PY{n}{histogram\PYZus{}8\PYZus{}1}\PY{o}{.}\PY{n}{Fill}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+        \PY{n}{histogram\PYZus{}8\PYZus{}1}\PY{o}{.}\PY{n}{Draw} \PY{p}{(}\PY{p}{)}
+        \PY{n}{canvas\PYZus{}8\PYZus{}1\PYZus{}1}\PY{o}{.}\PY{n}{Draw} \PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{8-ROOT-in-Python_files/8-ROOT-in-Python_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{8.2 Custom code: from C++ to
+Python}\label{custom-code-from-c-to-python}
+
+The ROOT interpreter and type sytem offer interesting possibilities when
+it comes to JITting of C++ code. Take for example this header file,
+containing a class and a function.
+
+\begin{verbatim}
+##file cpp2pythonExample.h
+#include "stdio.h"
+
+class A{
+public:
+ A(int i):m_i(i){}
+ int getI() const {return m_i;}
+private:
+ int m_i=0;
+};
+
+void printA(const A& a ){
+  printf ("The value of A instance is %i.\n",a.getI());
+}
+\end{verbatim}
+
+This example might seem trivial, but it shows a powerful ROOT feature.
+C++ code can be JITted within PyROOT and the entities defined in C++ can
+be transparently used in Python!
+
+\begin{verbatim}
+>>> import ROOT
+>>> ROOT.gInterpreter.ProcessLine('#include "cpp2pythonExample.h"')
+>>> a = ROOT.A(123)
+>>> ROOT.printA(a)
+The value of A instance is 123.
+\end{verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

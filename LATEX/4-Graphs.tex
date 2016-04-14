@@ -1,0 +1,621 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{4-Graphs}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    In this Chapter we will learn how to exploit some of the functionalities
+ROOT provides to display data exploiting the class
+\href{https://root.cern.ch/doc/master/classTGraphErrors.html}{\texttt{TGraphErrors}},
+which you already got to know previously.
+
+\subsection{4.1 Read Graph Points from
+File}\label{read-graph-points-from-file}
+
+The fastest way in which you can fill a graph with experimental data is
+to use the constructor which reads data points and their errors from an
+ASCII file (i.e.~standard text) format:
+
+\begin{verbatim}
+TGraphErrors(const char *filename, const char *format="%lg %lg %lg %lg", Option_t *option="");
+\end{verbatim}
+
+The format string can be:
+
+\begin{itemize}
+\item
+  ``\%lg \%lg'' read only 2 first columns into X,Y
+\item
+  ``\%lg \%lg \%lg'' read only 3 first columns into X,Y and EY
+\item
+  ``\%lg \%lg \%lg \%lg'' read only 4 first columns into X,Y,EX,EY
+\end{itemize}
+
+This approach has the nice feature of allowing the user to reuse the
+macro for many different data sets. Here is an example of an input file.
+The nice graphic result shown is produced by the macro below, which
+reads two such input files and uses different options to display the
+data points.
+
+``` \# Measurement of Friday 26 March \# Experiment 2 Physics Lab
+
+1 6 5 2 12 5 3 14 4.7 4 20 4.5 5 22 4.2 6 24 5.1 7 35 2.9 8 45 4.1 9 44
+4.8 10 53 5.43 ```
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{o}{\PYZpc{}}\PY{n}{jsroot} \PY{n}{on}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}}\PY{o}{\PYZpc{}}\PY{n}{cpp} \PY{o}{\PYZhy{}}\PY{n}{d}
+        \PY{c+c1}{// Reads the points from a file and produces a simple graph.}
+        \PY{k+kt}{int} \PY{n}{macro\PYZus{}4\PYZus{}1}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
+            \PY{k}{auto} \PY{n}{canvas\PYZus{}4\PYZus{}1}\PY{o}{=}\PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            \PY{n}{canvas\PYZus{}4\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetGrid}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            
+            \PY{n}{TGraphErrors} \PY{n+nf}{graph\PYZus{}expected}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{../data/macro4\PYZus{}1\PYZus{}input\PYZus{}expected.txt}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}lg \PYZpc{}lg \PYZpc{}lg}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{graph\PYZus{}expected}\PY{p}{.}\PY{n}{SetTitle}\PY{p}{(}
+               \PY{l+s}{\PYZdq{}}\PY{l+s}{Measurement XYZ and Expectation;}\PY{l+s}{\PYZdq{}}
+               \PY{l+s}{\PYZdq{}}\PY{l+s}{lenght [cm];}\PY{l+s}{\PYZdq{}}
+               \PY{l+s}{\PYZdq{}}\PY{l+s}{Arb.Units}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{graph\PYZus{}expected}\PY{p}{.}\PY{n}{SetFillColor}\PY{p}{(}\PY{n}{kYellow}\PY{p}{)}\PY{p}{;}
+            \PY{n}{graph\PYZus{}expected}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{E3AL}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;} \PY{c+c1}{// E3 draws the band}
+        
+            \PY{n}{TGraphErrors} \PY{n+nf}{graph}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{../data/macro4\PYZus{}1\PYZus{}input.txt}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}lg \PYZpc{}lg \PYZpc{}lg}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{graph}\PY{p}{.}\PY{n}{SetMarkerStyle}\PY{p}{(}\PY{n}{kCircle}\PY{p}{)}\PY{p}{;}
+            \PY{n}{graph}\PY{p}{.}\PY{n}{SetFillColor}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{;}
+            \PY{n}{graph}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{PESame}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        
+            \PY{c+c1}{// Draw the Legend}
+            \PY{n}{TLegend} \PY{n+nf}{leg}\PY{p}{(}\PY{l+m+mf}{.1}\PY{p}{,}\PY{l+m+mf}{.7}\PY{p}{,}\PY{l+m+mf}{.3}\PY{p}{,}\PY{l+m+mf}{.9}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Lab. Lesson 2}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{leg}\PY{p}{.}\PY{n}{SetFillColor}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{;}
+            \PY{n}{leg}\PY{p}{.}\PY{n}{AddEntry}\PY{p}{(}\PY{o}{\PYZam{}}\PY{n}{graph\PYZus{}expected}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Expected Points}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{leg}\PY{p}{.}\PY{n}{AddEntry}\PY{p}{(}\PY{o}{\PYZam{}}\PY{n}{graph}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Measured Points}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{leg}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Same}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        
+            \PY{n}{graph}\PY{p}{.}\PY{n}{Print}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            \PY{n}{canvas\PYZus{}4\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            \PY{k}{return} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{macro\PYZus{}4\PYZus{}1}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+x[0]=1, y[0]=6, ex[0]=0, ey[0]=5
+x[1]=2, y[1]=12, ex[1]=0, ey[1]=5
+x[2]=3, y[2]=14, ex[2]=0, ey[2]=4.7
+x[3]=4, y[3]=20, ex[3]=0, ey[3]=4.5
+x[4]=5, y[4]=22, ex[4]=0, ey[4]=4.2
+x[5]=6, y[5]=24, ex[5]=0, ey[5]=5.1
+x[6]=7, y[6]=35, ex[6]=0, ey[6]=2.9
+x[7]=8, y[7]=45, ex[7]=0, ey[7]=4.1
+x[8]=9, y[8]=44, ex[8]=0, ey[8]=4.8
+x[9]=10, y[9]=53, ex[9]=0, ey[9]=5.43
+    \end{Verbatim}
+
+    In addition to the inspection of the plot, you can check the actual
+contents of the graph with the
+\href{https://root.cern.ch/doc/master/classTGraph.html\#aaa3ad04cb8017339ac8e96543ba3b5fb}{\texttt{TGraph::Print()}}
+method at any time, obtaining a printout of the coordinates of data
+points on screen. The macro also shows us how to print a coloured band
+around a graph instead of error bars, quite useful for example to
+represent the errors of a theoretical prediction.
+
+\subsection{4.2 Polar Graphs}\label{polar-graphs}
+
+With ROOT you can profit from rather advanced plotting routines, like
+the ones implemented in the
+\href{https://root.cern.ch/doc/v606/classTGraphPolar.html}{\texttt{TPolarGraph}},
+a class to draw graphs in polar coordinates. You can see the example
+macro in the following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{auto} \PY{n}{canvas\PYZus{}4\PYZus{}2} \PY{o}{=} \PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{myCanvas}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{myCanvas}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{)}\PY{p}{;}
+        \PY{n}{Double\PYZus{}t} \PY{n}{rmin}\PY{o}{=}\PY{l+m+mf}{0.}\PY{p}{;}
+        \PY{n}{Double\PYZus{}t} \PY{n}{rmax}\PY{o}{=}\PY{n}{TMath}\PY{o}{:}\PY{o}{:}\PY{n}{Pi}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{6.}\PY{p}{;}
+        \PY{k}{const} \PY{n}{Int\PYZus{}t} \PY{n}{npoints}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{;}
+        \PY{n}{Double\PYZus{}t} \PY{n}{r}\PY{p}{[}\PY{n}{npoints}\PY{p}{]}\PY{p}{;}
+        \PY{n}{Double\PYZus{}t} \PY{n}{theta}\PY{p}{[}\PY{n}{npoints}\PY{p}{]}\PY{p}{;}
+        \PY{k}{for} \PY{p}{(}\PY{n}{Int\PYZus{}t} \PY{n}{ipt} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;} \PY{n}{ipt} \PY{o}{\PYZlt{}} \PY{n}{npoints}\PY{p}{;} \PY{n}{ipt}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{r}\PY{p}{[}\PY{n}{ipt}\PY{p}{]} \PY{o}{=} \PY{n}{ipt}\PY{o}{*}\PY{p}{(}\PY{n}{rmax}\PY{o}{\PYZhy{}}\PY{n}{rmin}\PY{p}{)}\PY{o}{/}\PY{n}{npoints}\PY{o}{+}\PY{n}{rmin}\PY{p}{;}
+            \PY{n}{theta}\PY{p}{[}\PY{n}{ipt}\PY{p}{]} \PY{o}{=} \PY{n}{TMath}\PY{o}{:}\PY{o}{:}\PY{n}{Sin}\PY{p}{(}\PY{n}{r}\PY{p}{[}\PY{n}{ipt}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+        \PY{n}{TGraphPolar} \PY{n}{grP1} \PY{p}{(}\PY{n}{npoints}\PY{p}{,}\PY{n}{r}\PY{p}{,}\PY{n}{theta}\PY{p}{)}\PY{p}{;}
+        \PY{n}{grP1}\PY{p}{.}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{A Fan}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{grP1}\PY{p}{.}\PY{n}{SetLineWidth}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{;}
+        \PY{n}{grP1}\PY{p}{.}\PY{n}{SetLineColor}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+        \PY{n}{grP1}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{L}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{canvas\PYZus{}4\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{4-Graphs_files/4-Graphs_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    A new element was added on the canvas declaration, the size of the
+canvas: it is sometimes optically better to show plots in specific
+canvas sizes.
+
+    \subsection{4.3 2D Graphs}\label{d-graphs}
+
+Under specific circumstances, it might be useful to plot some quantities
+versus two variables, therefore creating a bi-dimensional graph. Of
+course ROOT can help you in this task, with the
+\href{https://root.cern.ch/doc/master/classTGraph2DErrors.html}{\texttt{TGraph2DErrors}}
+class. The following macro produces a bi-dimensional graph representing
+a hypothetical measurement, fits a bi-dimensional function to it and
+draws it together with its x and y projections. Some points of the code
+will be explained in detail. This time, the graph is populated with data
+points using random numbers, introducing a new and very important
+ingredient, the ROOT \texttt{TRandom3} random number generator using the
+\href{http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html}{Mersenne
+Twister algorithm (Matsumoto 1997)}.
+
+Let's go through the code, step by step to understand what is going on:
+
+    \begin{itemize}
+\tightlist
+\item
+  The instance of the random generator. You can then draw out of this
+  instance random numbers distributed according to different probability
+  density functions, like the Uniform one at point 2. See the on-line
+  documentation to appreciate the full power of this ROOT feature.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{//\PYZsh{}1}
+        \PY{n}{TRandom3} \PY{n}{my\PYZus{}random\PYZus{}generator}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  You are already familiar with the TF1 class. This is its
+  two-dimensional version. At line 16 two random numbers distributed
+  according to the TF2 formula are drawn with the method
+  TF2::GetRandom2(double\& a, double\&b).
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{//\PYZsh{}2}
+        \PY{n}{TF2} \PY{n+nf}{function\PYZus{}4\PYZus{}3}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{f2}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{1000*(([0]*sin(x)}\PY{o}{/}\PY{n}{x}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{sin}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{o}{/}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{2000}\PY{l+s}{\PYZdq{}}\PY{l+s}{,\PYZhy{}6,6,\PYZhy{}6,6)}\PY{p}{;}
+        \PY{n}{function\PYZus{}4\PYZus{}3}\PY{p}{.}\PY{n}{SetParameters}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+        \PY{n}{TGraph2DErrors} \PY{n+nf}{dte}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{;}
+        \PY{c+c1}{// Fill the 2D graph}
+        \PY{k+kt}{double} \PY{n}{rnd}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{ex}\PY{p}{,} \PY{n}{ey}\PY{p}{,} \PY{n}{ez}\PY{p}{;}
+        \PY{k}{for} \PY{p}{(}\PY{n}{Int\PYZus{}t} \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{;} \PY{n}{i}\PY{o}{\PYZlt{}}\PY{l+m+mi}{500}\PY{p}{;} \PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{n}{function\PYZus{}4\PYZus{}3}\PY{p}{.}\PY{n}{GetRandom2}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{;}
+            \PY{c+c1}{// A random number in [\PYZhy{}e,e]}
+            \PY{n}{rnd} \PY{o}{=} \PY{n}{my\PYZus{}random\PYZus{}generator}\PY{p}{.}\PY{n}{Uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{;}
+            \PY{n}{z} \PY{o}{=} \PY{n}{function\PYZus{}4\PYZus{}3}\PY{p}{.}\PY{n}{Eval}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{rnd}\PY{p}{)}\PY{p}{;}
+            \PY{n}{dte}\PY{p}{.}\PY{n}{SetPoint}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{z}\PY{p}{)}\PY{p}{;}
+            \PY{n}{ex} \PY{o}{=} \PY{l+m+mf}{0.05}\PY{o}{*}\PY{n}{my\PYZus{}random\PYZus{}generator}\PY{p}{.}\PY{n}{Uniform}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            \PY{n}{ey} \PY{o}{=} \PY{l+m+mf}{0.05}\PY{o}{*}\PY{n}{my\PYZus{}random\PYZus{}generator}\PY{p}{.}\PY{n}{Uniform}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            \PY{n}{ez} \PY{o}{=} \PY{n}{fabs}\PY{p}{(}\PY{n}{z}\PY{o}{*}\PY{n}{rnd}\PY{p}{)}\PY{p}{;}
+            \PY{n}{dte}\PY{p}{.}\PY{n}{SetPointError}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{ex}\PY{p}{,}\PY{n}{ey}\PY{p}{,}\PY{n}{ez}\PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Fitting a 2-dimensional function just works like in the
+  one-dimensional case, i.e.~initialisation of parameters and calling of
+  the Fit() method.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{//\PYZsh{}4}
+        \PY{c+c1}{// Fit function to generated data}
+        \PY{n}{function\PYZus{}4\PYZus{}3}\PY{p}{.}\PY{n}{SetParameters}\PY{p}{(}\PY{l+m+mf}{0.7}\PY{p}{,}\PY{l+m+mf}{1.5}\PY{p}{)}\PY{p}{;}  \PY{c+c1}{// set initial values for fit}
+        \PY{n}{function\PYZus{}4\PYZus{}3}\PY{p}{.}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Fitted 2D function}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{dte}\PY{p}{.}\PY{n}{Fit}\PY{p}{(}\PY{o}{\PYZam{}}\PY{n}{function\PYZus{}4\PYZus{}3}\PY{p}{)}\PY{p}{;}
+        \PY{c+c1}{// Plot the result}
+        \PY{k}{auto} \PY{n}{canvas\PYZus{}4\PYZus{}3\PYZus{}1} \PY{o}{=} \PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        \PY{n}{function\PYZus{}4\PYZus{}3}\PY{p}{.}\PY{n}{SetLineWidth}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+        \PY{n}{function\PYZus{}4\PYZus{}3}\PY{p}{.}\PY{n}{SetLineColor}\PY{p}{(}\PY{n}{kBlue}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+FCN=550.868 FROM HESSE     STATUS=NOT POSDEF     14 CALLS          48 TOTAL
+                     EDM=9.72579e-13    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           6.83686e-01   1.49858e-01   4.34655e-06  -3.65525e-05
+   2  p1           1.46504e+00   3.21126e-01   9.31404e-06  -1.28163e-05
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  The Surf1 option draws the TF2 objects (but also bi-dimensional
+  histograms) as coloured surfaces with a wire-frame on
+  three-dimensional canvases.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{//\PYZsh{}5}
+        \PY{n}{TF2}   \PY{o}{*}\PY{n}{function\PYZus{}4\PYZus{}3\PYZus{}c} \PY{o}{=} \PY{p}{(}\PY{n}{TF2}\PY{o}{*}\PY{p}{)}\PY{n}{function\PYZus{}4\PYZus{}3}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Surf1}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Retrieve the axis pointer and define the axis titles.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{//\PYZsh{}6}
+        \PY{n}{TAxis} \PY{o}{*}\PY{n}{Xaxis} \PY{o}{=} \PY{n}{function\PYZus{}4\PYZus{}3\PYZus{}c}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetXaxis}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        \PY{n}{TAxis} \PY{o}{*}\PY{n}{Yaxis} \PY{o}{=} \PY{n}{function\PYZus{}4\PYZus{}3\PYZus{}c}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetYaxis}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        \PY{n}{TAxis} \PY{o}{*}\PY{n}{Zaxis} \PY{o}{=} \PY{n}{function\PYZus{}4\PYZus{}3\PYZus{}c}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetZaxis}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        \PY{n}{Xaxis}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{X Title}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;} \PY{n}{Xaxis}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetTitleOffset}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{p}{)}\PY{p}{;}
+        \PY{n}{Yaxis}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Y Title}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;} \PY{n}{Yaxis}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetTitleOffset}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{p}{)}\PY{p}{;}
+        \PY{n}{Zaxis}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Z Title}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;} \PY{n}{Zaxis}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetTitleOffset}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Draw the cloud of points on top of the coloured surface.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{//\PYZsh{}7}
+         \PY{n}{dte}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{P0 Same}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+         \PY{c+c1}{// Make the x and y projections}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Here you learn how to create a canvas, partition it in two sub-pads
+  and access them. It is very handy to show multiple plots in the same
+  window or image.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{//\PYZsh{}8}
+         \PY{k}{auto} \PY{n}{canvas\PYZus{}4\PYZus{}3\PYZus{}2}\PY{o}{=} \PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ProjCan}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{The Projections}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{400}\PY{p}{)}\PY{p}{;}
+         \PY{n}{canvas\PYZus{}4\PYZus{}3\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Divide}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{canvas\PYZus{}4\PYZus{}3\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{dte}\PY{p}{.}\PY{n}{Project}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{x}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+         \PY{n}{canvas\PYZus{}4\PYZus{}3\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+         \PY{n}{dte}\PY{p}{.}\PY{n}{Project}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{y}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            
+         \PY{n}{canvas\PYZus{}4\PYZus{}3\PYZus{}2} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \subsection{4.4 Multiple graphs}\label{multiple-graphs}
+
+The class
+\href{https://root.cern.ch/doc/master/classTMultiGraph.html}{\texttt{TMultigraph}}
+allows to manipulate a set of graphs as a single entity. It is a
+collection of TGraph (or derived) objects. When drawn, the X and Y axis
+ranges are automatically computed such as all the graphs will be
+visible.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{TCanvas} \PY{o}{*}\PY{n}{canvas\PYZus{}4\PYZus{}4} \PY{o}{=} \PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{canvas\PYZus{}4\PYZus{}4}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{multigraph}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{700}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{;}
+         \PY{n}{canvas\PYZus{}4\PYZus{}4}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetGrid}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    Here we create the multigraph.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{TMultiGraph} \PY{o}{*}\PY{n}{multigraph\PYZus{}4\PYZus{}4} \PY{o}{=} \PY{k}{new} \PY{n}{TMultiGraph}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+         
+         \PY{c+c1}{// create first graph}
+         \PY{k}{const} \PY{n}{Int\PYZus{}t} \PY{n}{n1} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{;}
+         \PY{n}{Double\PYZus{}t} \PY{n}{px1}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.61}\PY{p}{,}\PY{l+m+mf}{0.7}\PY{p}{,}\PY{l+m+mf}{0.85}\PY{p}{,}\PY{l+m+mf}{0.89}\PY{p}{,}\PY{l+m+mf}{0.95}\PY{p}{\PYZcb{}}\PY{p}{;}
+         \PY{n}{Double\PYZus{}t} \PY{n}{py1}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mf}{2.9}\PY{p}{,}\PY{l+m+mf}{5.6}\PY{p}{,}\PY{l+m+mf}{7.4}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mf}{9.6}\PY{p}{,}\PY{l+m+mf}{8.7}\PY{p}{,}\PY{l+m+mf}{6.3}\PY{p}{,}\PY{l+m+mf}{4.5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}\PY{p}{;}
+         \PY{n}{Double\PYZus{}t} \PY{n}{ex1}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mf}{.05}\PY{p}{,}\PY{l+m+mf}{.1}\PY{p}{,}\PY{l+m+mf}{.07}\PY{p}{,}\PY{l+m+mf}{.07}\PY{p}{,}\PY{l+m+mf}{.04}\PY{p}{,}\PY{l+m+mf}{.05}\PY{p}{,}\PY{l+m+mf}{.06}\PY{p}{,}\PY{l+m+mf}{.07}\PY{p}{,}\PY{l+m+mf}{.08}\PY{p}{,}\PY{l+m+mf}{.05}\PY{p}{\PYZcb{}}\PY{p}{;}
+         \PY{n}{Double\PYZus{}t} \PY{n}{ey1}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mf}{.8}\PY{p}{,}\PY{l+m+mf}{.7}\PY{p}{,}\PY{l+m+mf}{.6}\PY{p}{,}\PY{l+m+mf}{.5}\PY{p}{,}\PY{l+m+mf}{.4}\PY{p}{,}\PY{l+m+mf}{.4}\PY{p}{,}\PY{l+m+mf}{.5}\PY{p}{,}\PY{l+m+mf}{.6}\PY{p}{,}\PY{l+m+mf}{.7}\PY{p}{,}\PY{l+m+mf}{.8}\PY{p}{\PYZcb{}}\PY{p}{;}
+         \PY{n}{TGraphErrors} \PY{o}{*}\PY{n}{error\PYZus{}graph\PYZus{}1} \PY{o}{=} \PY{k}{new} \PY{n}{TGraphErrors}\PY{p}{(}\PY{n}{n1}\PY{p}{,}\PY{n}{px1}\PY{p}{,}\PY{n}{py1}\PY{p}{,}\PY{n}{ex1}\PY{p}{,}\PY{n}{ey1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{error\PYZus{}graph\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetMarkerColor}\PY{p}{(}\PY{n}{kBlue}\PY{p}{)}\PY{p}{;}
+         \PY{n}{error\PYZus{}graph\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetMarkerStyle}\PY{p}{(}\PY{l+m+mi}{21}\PY{p}{)}\PY{p}{;}
+         \PY{n}{multigraph\PYZus{}4\PYZus{}4}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Add}\PY{p}{(}\PY{n}{error\PYZus{}graph\PYZus{}1}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    Here we create two graphs with errors and add them in the multigraph.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{// create second graph}
+         \PY{k}{const} \PY{n}{Int\PYZus{}t} \PY{n}{n2} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{;}
+         \PY{n}{Float\PYZus{}t} \PY{n}{x2}\PY{p}{[}\PY{p}{]}  \PY{o}{=} \PY{p}{\PYZob{}}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.28}\PY{p}{,} \PY{l+m+mf}{0.005}\PY{p}{,} \PY{l+m+mf}{0.19}\PY{p}{,} \PY{l+m+mf}{0.29}\PY{p}{,} \PY{l+m+mf}{0.45}\PY{p}{,} \PY{l+m+mf}{0.56}\PY{p}{,}\PY{l+m+mf}{0.65}\PY{p}{,}\PY{l+m+mf}{0.80}\PY{p}{,}\PY{l+m+mf}{0.90}\PY{p}{,}\PY{l+m+mf}{1.01}\PY{p}{\PYZcb{}}\PY{p}{;}
+         \PY{n}{Float\PYZus{}t} \PY{n}{y2}\PY{p}{[}\PY{p}{]}  \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mf}{2.1}\PY{p}{,}\PY{l+m+mf}{3.86}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mf}{10.55}\PY{p}{,}\PY{l+m+mf}{9.64}\PY{p}{,}\PY{l+m+mf}{7.26}\PY{p}{,}\PY{l+m+mf}{5.42}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{\PYZcb{}}\PY{p}{;}
+         \PY{n}{Float\PYZus{}t} \PY{n}{ex2}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mf}{.04}\PY{p}{,}\PY{l+m+mf}{.12}\PY{p}{,}\PY{l+m+mf}{.08}\PY{p}{,}\PY{l+m+mf}{.06}\PY{p}{,}\PY{l+m+mf}{.05}\PY{p}{,}\PY{l+m+mf}{.04}\PY{p}{,}\PY{l+m+mf}{.07}\PY{p}{,}\PY{l+m+mf}{.06}\PY{p}{,}\PY{l+m+mf}{.08}\PY{p}{,}\PY{l+m+mf}{.04}\PY{p}{\PYZcb{}}\PY{p}{;}
+         \PY{n}{Float\PYZus{}t} \PY{n}{ey2}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mf}{.6}\PY{p}{,}\PY{l+m+mf}{.8}\PY{p}{,}\PY{l+m+mf}{.7}\PY{p}{,}\PY{l+m+mf}{.4}\PY{p}{,}\PY{l+m+mf}{.3}\PY{p}{,}\PY{l+m+mf}{.3}\PY{p}{,}\PY{l+m+mf}{.4}\PY{p}{,}\PY{l+m+mf}{.5}\PY{p}{,}\PY{l+m+mf}{.6}\PY{p}{,}\PY{l+m+mf}{.7}\PY{p}{\PYZcb{}}\PY{p}{;}
+         \PY{n}{TGraphErrors} \PY{o}{*}\PY{n}{error\PYZus{}graph\PYZus{}2} \PY{o}{=} \PY{k}{new} \PY{n}{TGraphErrors}\PY{p}{(}\PY{n}{n2}\PY{p}{,}\PY{n}{x2}\PY{p}{,}\PY{n}{y2}\PY{p}{,}\PY{n}{ex2}\PY{p}{,}\PY{n}{ey2}\PY{p}{)}\PY{p}{;}
+         \PY{n}{error\PYZus{}graph\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetMarkerColor}\PY{p}{(}\PY{n}{kRed}\PY{p}{)}\PY{p}{;}
+         \PY{n}{error\PYZus{}graph\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetMarkerStyle}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{;}
+         \PY{n}{multigraph\PYZus{}4\PYZus{}4}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Add}\PY{p}{(}\PY{n}{error\PYZus{}graph\PYZus{}1}\PY{p}{)}\PY{p}{;}
+         
+         \PY{n}{multigraph\PYZus{}4\PYZus{}4}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{apl}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    Here we draw the multigraph. The axis limits are computed automatically
+to make sure all the graphs' points will be in range.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{multigraph\PYZus{}4\PYZus{}4}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetXaxis}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{X values}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{multigraph\PYZus{}4\PYZus{}4}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetYaxis}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Y values}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+         
+         \PY{n}{gPad}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Update}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+         \PY{n}{gPad}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Modified}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+         \PY{n}{canvas\PYZus{}4\PYZus{}4}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

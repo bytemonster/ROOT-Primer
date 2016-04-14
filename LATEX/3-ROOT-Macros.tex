@@ -1,0 +1,757 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{3-ROOT-Macros}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    You know how other books go on and on about programming fundamentals and
+finally work up to building a complete, working program? Let's skip all
+that. In this guide, we will describe macros executed by the ROOT C++
+interpreter Cling.
+
+It is relatively easy to compile a macro, either as a pre-compiled
+library to load into ROOT, or as a stand-alone application, by adding
+some include statements for header file or some ``dressing code'' to any
+macro.
+
+\subsection{3.1 General Remarks on ROOT
+macros}\label{general-remarks-on-root-macros}
+
+If you have a number of lines which you were able to execute at the ROOT
+prompt, they can be turned into a ROOT macro by giving them a name which
+corresponds to the file name without extension. The general structure
+for a macro stored in file \texttt{MacroName.C} is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void} \NormalTok{MacroName() \{}
+        \NormalTok{<          ...}
+          \NormalTok{your lines of C++ code}
+                   \NormalTok{...             >}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The macro is executed by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \KeywordTok{>} \KeywordTok{root} \NormalTok{MacroName.C}
+\end{Highlighting}
+\end{Shaded}
+
+at the system prompt, or executed using \texttt{Bash\ .x} at the ROOT
+prompt.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \KeywordTok{>} \NormalTok{root }
+ \NormalTok{root [0] .x MacroName.C}
+\end{Highlighting}
+\end{Shaded}
+
+Or it can be loaded into a ROOT session and then be executed by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{root} \NormalTok{[0].L MacroName.C}
+\KeywordTok{root} \NormalTok{[1] MacroName();}
+\end{Highlighting}
+\end{Shaded}
+
+at the ROOT prompt.Note that more than one macro can be loaded this way,
+as each macro has a unique name in the ROOT name space. A small set of
+options can help making your plot nicer.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gROOT->SetStyle(}\StringTok{"Plain"}\NormalTok{);   }\CommentTok{// set plain TStyle}
+\NormalTok{gStyle->SetOptStat(}\DecValTok{111111}\NormalTok{); }\CommentTok{// draw statistics on plots,}
+                            \CommentTok{// (0) for no output}
+\NormalTok{gStyle->SetOptFit(}\DecValTok{1111}\NormalTok{);    }\CommentTok{// draw fit results on plot,}
+                            \CommentTok{// (0) for no ouput}
+\NormalTok{gStyle->SetPalette(}\DecValTok{57}\NormalTok{);     }\CommentTok{// set color map}
+\NormalTok{gStyle->SetOptTitle(}\DecValTok{0}\NormalTok{);     }\CommentTok{// suppress title box}
+\end{Highlighting}
+\end{Shaded}
+
+Next, you should create a canvas for graphical output, with size,
+subdivisions and format suitable to your needs, see documentation of
+class \texttt{TCanvas}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{TCanvas} \PY{n+nf}{canvas\PYZus{}3\PYZus{}1}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{3\PYZhy{}1\PYZhy{}Canvas}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZlt{}Title\PYZgt{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{900}\PY{p}{,}\PY{l+m+mi}{400}\PY{p}{)}\PY{p}{;} 
+        \PY{n}{canvas\PYZus{}3\PYZus{}1}\PY{p}{.}\PY{n}{Divide}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;} 
+        \PY{n}{canvas\PYZus{}3\PYZus{}1}\PY{p}{.}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;} 
+        \PY{n}{TF1} \PY{n+nf}{f1}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{f1}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{sin(x)}\PY{o}{/}\PY{n}{x}\PY{l+s}{\PYZdq{}}\PY{l+s}{,0.,10.)}\PY{p}{;}
+        \PY{n}{f1}\PY{p}{.}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        \PY{n}{canvas\PYZus{}3\PYZus{}1}\PY{p}{.}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+        \PY{n}{TF1} \PY{n+nf}{f2}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{f2}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{sin(x)}\PY{o}{/}\PY{n}{x}\PY{l+s}{\PYZdq{}}\PY{l+s}{,0.,10.)}\PY{p}{;}
+        \PY{n}{f2}\PY{p}{.}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        \PY{n}{canvas\PYZus{}3\PYZus{}1}\PY{p}{.}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{3-ROOT-Macros_files/3-ROOT-Macros_1_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    These parts of a well-written macro are pretty standard, and you should
+remember to include pieces of code like in the examples above to make
+sure your plots always look as you had intended.
+
+Below, in section Interpretation and Compilation, some more code
+fragments will be shown, allowing you to use the system compiler to
+compile macros for more efficient execution, or turn macros into
+stand-alone applications linked against the ROOT libraries.
+
+\subsection{3.2 A more complete example}\label{a-more-complete-example}
+
+Let us now look at a rather complete example of a typical task in data
+analysis, a macro that constructs a graph with errors, fits a (linear)
+model to it and saves it as an image. To run this macro, simply type in
+the shell:
+
+\begin{verbatim}
+ > root macro1.C
+\end{verbatim}
+
+The code is built around the ROOT class \texttt{TGraphErrors}, which was
+already introduced previously. Have a look at it in the class reference
+guide, where you will also find further examples. The macro shown below
+uses additional classes, \texttt{TF1} to define a function, TCanvas to
+define size and properties of the window used for our plot, and
+\texttt{TLegend} to add a nice legend. For the moment, ignore the
+commented include statements for header files, they will only become
+important at the end in section Interpretation and Compilation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}}\PY{o}{\PYZpc{}}\PY{n}{cpp} \PY{o}{\PYZhy{}}\PY{n}{d}
+        
+        \PY{c+c1}{// Builds a graph with errors, displays it and saves it as}
+        \PY{c+c1}{// image. First, include some header files}
+        \PY{c+c1}{// (not necessary for Cling)}
+        
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}TCanvas.h\PYZdq{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}TROOT.h\PYZdq{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}TGraphErrors.h\PYZdq{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}TF1.h\PYZdq{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}TLegend.h\PYZdq{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}TArrow.h\PYZdq{}}
+        \PY{c+cp}{\PYZsh{}}\PY{c+cp}{include} \PY{c+cpf}{\PYZdq{}TLatex.h\PYZdq{}}
+            
+            
+        \PY{k+kt}{void} \PY{n}{macro3\PYZus{}2\PYZus{}1}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}   \PY{c+c1}{//\PYZsh{}1}
+            \PY{c+c1}{// The values and the errors on the Y axis}
+            \PY{k}{const} \PY{k+kt}{int} \PY{n}{n\PYZus{}points}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{;}
+            \PY{k+kt}{double} \PY{n}{x\PYZus{}vals}\PY{p}{[}\PY{n}{n\PYZus{}points}\PY{p}{]}\PY{o}{=}
+                    \PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{\PYZcb{}}\PY{p}{;}
+            \PY{k+kt}{double} \PY{n}{y\PYZus{}vals}\PY{p}{[}\PY{n}{n\PYZus{}points}\PY{p}{]}\PY{o}{=}
+                    \PY{p}{\PYZob{}}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{22}\PY{p}{,}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{,}\PY{l+m+mi}{45}\PY{p}{,}\PY{l+m+mi}{44}\PY{p}{,}\PY{l+m+mi}{53}\PY{p}{\PYZcb{}}\PY{p}{;}
+            \PY{k+kt}{double} \PY{n}{y\PYZus{}errs}\PY{p}{[}\PY{n}{n\PYZus{}points}\PY{p}{]}\PY{o}{=}
+                    \PY{p}{\PYZob{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mf}{4.7}\PY{p}{,}\PY{l+m+mf}{4.5}\PY{p}{,}\PY{l+m+mf}{4.2}\PY{p}{,}\PY{l+m+mf}{5.1}\PY{p}{,}\PY{l+m+mf}{2.9}\PY{p}{,}\PY{l+m+mf}{4.1}\PY{p}{,}\PY{l+m+mf}{4.8}\PY{p}{,}\PY{l+m+mf}{5.43}\PY{p}{\PYZcb{}}\PY{p}{;}
+        
+            \PY{c+c1}{// Instance of the graph}
+            \PY{c+c1}{//\PYZsh{}2}
+            \PY{n}{TGraphErrors} \PY{n+nf}{graph}\PY{p}{(}\PY{n}{n\PYZus{}points}\PY{p}{,}\PY{n}{x\PYZus{}vals}\PY{p}{,}\PY{n}{y\PYZus{}vals}\PY{p}{,}\PY{k}{nullptr}\PY{p}{,}\PY{n}{y\PYZus{}errs}\PY{p}{)}\PY{p}{;}
+            \PY{n}{graph}\PY{p}{.}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Measurement XYZ;lenght [cm];Arb.Units}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        
+            \PY{c+c1}{// Make the plot estetically better}
+            \PY{c+c1}{//\PYZsh{}3}
+            \PY{n}{graph}\PY{p}{.}\PY{n}{SetMarkerStyle}\PY{p}{(}\PY{n}{kOpenCircle}\PY{p}{)}\PY{p}{;}
+            \PY{n}{graph}\PY{p}{.}\PY{n}{SetMarkerColor}\PY{p}{(}\PY{n}{kBlue}\PY{p}{)}\PY{p}{;}
+            \PY{n}{graph}\PY{p}{.}\PY{n}{SetLineColor}\PY{p}{(}\PY{n}{kBlue}\PY{p}{)}\PY{p}{;}
+        
+            \PY{c+c1}{// The canvas on which we\PYZsq{}ll draw the graph}
+            \PY{c+c1}{//\PYZsh{}4}
+            \PY{k}{auto}  \PY{n}{Canvas\PYZus{}3\PYZus{}2\PYZus{}1} \PY{o}{=} \PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        
+            \PY{c+c1}{// Draw the graph !}
+            \PY{c+c1}{//\PYZsh{}5}
+            \PY{n}{graph}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{APE}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        
+            \PY{c+c1}{// Define a linear function}
+            \PY{c+c1}{//\PYZsh{}6}
+            \PY{n}{TF1} \PY{n+nf}{function\PYZus{}3\PYZus{}2\PYZus{}1}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Linear law}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{[0]+x*[1]}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mf}{.5}\PY{p}{,}\PY{l+m+mf}{10.5}\PY{p}{)}\PY{p}{;}
+            \PY{c+c1}{// Let\PYZsq{}s make the funcion line nicer}
+            \PY{c+c1}{//\PYZsh{}7}
+            \PY{n}{function\PYZus{}3\PYZus{}2\PYZus{}1}\PY{p}{.}\PY{n}{SetLineColor}\PY{p}{(}\PY{n}{kRed}\PY{p}{)}\PY{p}{;}  \PY{n}{function\PYZus{}3\PYZus{}2\PYZus{}1}\PY{p}{.}\PY{n}{SetLineStyle}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+            \PY{c+c1}{// Fit it to the graph and draw it}
+            \PY{c+c1}{//\PYZsh{}8}
+            \PY{n}{graph}\PY{p}{.}\PY{n}{Fit}\PY{p}{(}\PY{o}{\PYZam{}}\PY{n}{function\PYZus{}3\PYZus{}2\PYZus{}1}\PY{p}{)}\PY{p}{;}
+            \PY{n}{function\PYZus{}3\PYZus{}2\PYZus{}1}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Same}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        
+            \PY{c+c1}{// Build and Draw a legend}
+            \PY{c+c1}{//\PYZsh{}9}
+            \PY{n}{TLegend} \PY{n+nf}{leg}\PY{p}{(}\PY{l+m+mf}{.1}\PY{p}{,}\PY{l+m+mf}{.7}\PY{p}{,}\PY{l+m+mf}{.3}\PY{p}{,}\PY{l+m+mf}{.9}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Lab. Lesson 1}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{leg}\PY{p}{.}\PY{n}{SetFillColor}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{;}
+            \PY{n}{graph}\PY{p}{.}\PY{n}{SetFillColor}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{;}
+            \PY{n}{leg}\PY{p}{.}\PY{n}{AddEntry}\PY{p}{(}\PY{o}{\PYZam{}}\PY{n}{graph}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Exp. Points}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{leg}\PY{p}{.}\PY{n}{AddEntry}\PY{p}{(}\PY{o}{\PYZam{}}\PY{n}{function\PYZus{}3\PYZus{}2\PYZus{}1}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Th. Law}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{leg}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Same}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        
+            \PY{c+c1}{// Draw an arrow on the canvas}
+            \PY{c+c1}{//\PYZsh{}10}
+            \PY{n}{TArrow} \PY{n+nf}{arrow}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mf}{6.2}\PY{p}{,}\PY{l+m+mi}{23}\PY{p}{,}\PY{l+m+mf}{0.02}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{|\PYZgt{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{arrow}\PY{p}{.}\PY{n}{SetLineWidth}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+            \PY{n}{arrow}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        
+            \PY{c+c1}{// Add some text to the plot}
+            \PY{c+c1}{//\PYZsh{}11}
+            \PY{n}{TLatex} \PY{n+nf}{text}\PY{p}{(}\PY{l+m+mf}{8.2}\PY{p}{,}\PY{l+m+mf}{7.5}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}splitline\PYZob{}Maximum\PYZcb{}\PYZob{}Deviation\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{text}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        
+            \PY{c+cm}{/*this command will create a pdf file with the graph in the same folder. }
+        \PY{c+cm}{    If you want to use it you can uncoment it and comment the Draw command bellow.*/}
+            \PY{c+c1}{//\PYZsh{}12}
+            
+            \PY{c+c1}{//mycanvas\PYZhy{}\PYZgt{}Print(\PYZdq{}graph\PYZus{}with\PYZus{}law.pdf\PYZdq{});}
+            \PY{n}{Canvas\PYZus{}3\PYZus{}2\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+    Let's give a look to the obtained plot. Beautiful outcome for such a
+small bunch of lines, isn't it ?
+
+Your first plot with data points, a fit of an analytical function, a
+legend and some additional information in the form of graphics
+primitives and text. A well formatted plot, clear for the reader is
+crucial to communicate the relevance of your results to the reader.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{macro3\PYZus{}2\PYZus{}1}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{3-ROOT-Macros_files/3-ROOT-Macros_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+FCN=3.84883 FROM MIGRAD    STATUS=CONVERGED      31 CALLS          32 TOTAL
+                     EDM=5.96982e-22    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0          -1.01604e+00   3.33409e+00   1.48321e-03  -8.98235e-12
+   2  p1           5.18756e+00   5.30717e-01   2.36095e-04   9.40487e-12
+    \end{Verbatim}
+
+    Let's comment it in detail:
+
+\begin{itemize}
+\item
+  \textbf{Point \#1:} the name of the principal function (it plays the
+  role of the ``main'' function in compiled programs) in the macro file.
+  It has to be the same as the file name without extension.
+\item
+  \textbf{Point \#2:} instance of the TGraphErrors class. The
+  constructor takes the number of points and the pointers to the arrays
+  of x values, y values, x errors (in this case none, represented by the
+  NULL pointer) and y errors. The second line defines in one shot the
+  title of the graph and the titles of the two axes, separated by a
+  ``;''.
+\item
+  \textbf{Point \#3:} These three lines are rather intuitive right ? To
+  understand better the enumerators for colours and styles see the
+  reference for the TColor and TMarker classes.
+\item
+  \textbf{Point \#4:} the canvas object that will host the drawn
+  objects. The ``memory leak'' is intentional, to make the object
+  existing also out of the macro1 scope.
+\item
+  \textbf{Point \#5:} the method
+  \href{https://root.cern.ch/doc/master/classTObject.html\#a45d0875bf30660d0903a93d690ff9f7e}{DrawClone}
+  draws a clone of the object on the canvas. It has to be a clone, to
+  survive after the scope of macro1, and be displayed on screen after
+  the end of the macro execution. The string option ``APE'' stands for:
+\item
+  A imposes the drawing of the Axes.
+\item
+  P imposes the drawing of the graph's markers.
+\item
+  E imposes the drawing of the graph's error bars.
+\item
+  \textbf{Point \#6:} define a mathematical function. There are several
+  ways to accomplish this, but in this case the constructor accepts the
+  name of the function, the formula, and the function range.
+\item
+  \textbf{Point \#7:} maquillage. Try to give a look to the line styles
+  at your disposal visiting the documentation of the TLine class.
+\item
+  \textbf{Point \#8:} fits the f function to the graph, observe that the
+  pointer is passed. It is more interesting to look at the output on the
+  screen to see the parameters values and other crucial information that
+  we will learn to read at the end of this guide. The DrawClone comand
+  tha follows draws the clone of the object on the canvas again. The
+  ``Same'' option avoids the cancellation of the already drawn objects,
+  in our case, the graph. The function f will be drawn using the same
+  axis system defined by the previously drawn graph.
+\item
+  \textbf{Point \#9:} completes the plot with a legend, represented by a
+  TLegend instance. The constructor takes as parameters the lower left
+  and upper right corners coordinates with respect to the total size of
+  the canvas, assumed to be 1, and the legend header string. You can add
+  to the legend the objects, previously drawn or not drawn, through the
+  addEntry method. Observe how the legend is drawn at the end: looks
+  familiar now, right ?
+\item
+  \textbf{Point \#10:} defines an arrow with a triangle on the right
+  hand side, a thickness of 2 and draws it.
+\item
+  \textbf{Point \#11:} interpret a Latex string which hast its lower
+  left corner located in the specified coordinate. The
+  \#splitline\{\}\{\} construct allows to store multiple lines in the
+  same TLatex object.
+\item
+  \textbf{Point \#12:} save the canvas as image. The format is
+  automatically inferred from the file extension (it could have been
+  eps, gif, \ldots{}).
+\end{itemize}
+
+\subsection{3.3 Summary of Visual
+effects}\label{summary-of-visual-effects}
+
+\subsubsection{3.3.1 Colours and Graph
+Markers}\label{colours-and-graph-markers}
+
+We have seen that to specify a colour, some identifiers like kWhite,
+kRed or kBlue can be specified for markers, lines, arrows etc. The
+complete summary of colours is represented by the ROOT
+\href{http://root.cern.ch/root/htmldoc/TColor.html\#C02}{``colour
+wheel''}. To know more about the full story, refer to the online
+documentation of \texttt{TColor}.
+
+ROOT provides several
+\href{http://root.cern.ch/root/htmldoc/TAttMarker.html\#M2}{graphics
+markers} types. Select the most suited symbols for your plot among dots,
+triangles, crosses or stars. An alternative set of names for the markers
+is available.
+
+\subsubsection{3.3.2 Arrows and Lines}\label{arrows-and-lines}
+
+The macro line 55 shows how to define an arrow and draw it. The class
+representing arrows is \texttt{TArrow}, which inherits from
+\texttt{TLine}. The constructors of lines and arrows always contain the
+coordinates of the endpoints. Arrows also foresee parameters to
+\href{http://root.cern.ch/root/htmldoc/TArrow.html}{specify their}
+shapes. Do not underestimate the role of lines and arrows in your plots.
+Since each plot should contain a message, it is convenient to stress it
+with additional graphics primitives.
+
+\subsubsection{3.3.3 Text}\label{text}
+
+Also text plays a fundamental role in making the plots self-explanatory.
+A possibility to add text in your plot is provided by the TLatex class.
+The objects of this class are constructed with the coordinates of the
+bottom-left corner of the text and a string which contains the text
+itself. The real twist is that ordinary
+\href{http://root.cern.ch/root/htmldoc/TLatex.html\#L5}{Latex
+mathematical symbols} are automatically interpreted, you just need to
+replace the ``'' by a ``\#''.
+
+If \href{http://root.cern.ch/root/htmldoc/TLatex.html\#L14}{``'' is used
+as control character} , then the
+\href{http://root.cern.ch/root/htmldoc/TMathText.html}{TMathText
+interface} is invoked. It provides the plain TeX syntax and allow to
+access character's set like Russian and Japenese.
+
+\subsection{3.4 Interpretation and
+Compilation}\label{interpretation-and-compilation}
+
+As you observed, up to now we heavily exploited the capabilities of ROOT
+for interpreting our code, more than compiling and then executing. This
+is sufficient for a wide range of applications, but you might have
+already asked yourself ``how can this code be compiled ?''. There are
+two answers.
+
+\subsubsection{3.4.1 Compile a Macro with
+ACLiC}\label{compile-a-macro-with-aclic}
+
+\href{https://root.cern.ch/compiling-your-code-also-known-aclic}{ACLiC}
+will create for you a compiled dynamic library for your macro, without
+any effort from your side, except the insertion of the appropriate
+header files at the top of the code. In this example, they are already
+included. To generate an object library from the macro code, from inside
+the interpreter type (please note the ``+''):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \KeywordTok{root} \NormalTok{[1] .L macro1.C+}
+\end{Highlighting}
+\end{Shaded}
+
+Once this operation is accomplished, the macro symbols will be available
+in memory and you will be able to execute it simply by calling from
+inside the interpreter:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{root} \NormalTok{[2] macro1()}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{3.4.2 Compile a Macro with the
+Compiler}\label{compile-a-macro-with-the-compiler}
+
+A plethora of excellent compilers are available, both free and
+commercial. We will refer to the
+\href{https://gcc.gnu.org/onlinedocs/}{\texttt{GCC}} compiler in the
+following. In this case, you have to include the appropriate headers in
+the code and then exploit the root-config tool for the automatic
+settings of all the compiler flags. root-config is a script that comes
+with ROOT; it prints all flags and libraries needed to compile code and
+link it with the ROOT libraries. In order to make the code executable
+stand-alone, an entry point for the operating system is needed, in C++
+this is the procedure \texttt{int\ main();}. The easiest way to turn a
+ROOT macro code into a stand-alone application is to add the following
+``dressing code'' at the end of the macro file. This defines the
+procedure main, the only purpose of which is to call your macro:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int} \NormalTok{main() \{}
+  \NormalTok{ExampleMacro();}
+  \KeywordTok{return} \DecValTok{0}\NormalTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+To create a stand-alone program from a macro called
+\texttt{ExampleMacro.C}, simply type
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \KeywordTok{>} \KeywordTok{g++} \NormalTok{-o ExampleMacro ExampleMacro.C }\StringTok{'root-config --cflags --libs'}
+\end{Highlighting}
+\end{Shaded}
+
+and execute it by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \KeywordTok{>} \KeywordTok{./ExampleMacro}
+\end{Highlighting}
+\end{Shaded}
+
+This procedure will, however, not give access to the ROOT graphics, as
+neither control of mouse or keyboard events nor access to the graphics
+windows of ROOT is available. If you want your stand-alone application
+have display graphics output and respond to mouse and keyboard, a
+slightly more complex piece of code can be used. In the example below, a
+macro \texttt{ExampleMacro\_GUI} is executed by the ROOT class
+\href{https://root.cern.ch/doc/master/classTApplication.html}{\texttt{TApplication}}.
+As a additional feature, this code example offers access to parameters
+eventually passed to the program when started from the command line.
+Here is the code fragment:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{o}{\PYZpc{}}\PY{o}{\PYZpc{}}\PY{n}{cpp} \PY{o}{\PYZhy{}}\PY{n}{d}
+        \PY{c+cm}{/*}
+        \PY{c+cm}{ This piece of code demonstrates how a root macro is used as a standalone}
+        \PY{c+cm}{    application with full acces the grapical user interface (GUI) of ROOT   */}
+        
+        \PY{c+c1}{//     ==\PYZgt{}\PYZgt{}  put the code of your macro here}
+        \PY{k+kt}{void} \PY{n}{ExampleMacro\PYZus{}GUI}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+          \PY{c+c1}{// Create a histogram, fill it with random gaussian numbers}
+          \PY{n}{TH1F} \PY{o}{*}\PY{n}{histogram\PYZus{}3\PYZus{}1} \PY{o}{=} \PY{k}{new} \PY{n}{TH1F} \PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{histogram\PYZus{}3\PYZus{}1}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{example histogram}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{5.}\PY{p}{,}\PY{l+m+mf}{5.}\PY{p}{)}\PY{p}{;}
+          \PY{n}{histogram\PYZus{}3\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{FillRandom}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{gaus}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{;}
+          
+          \PY{k}{auto}  \PY{n}{mycanvas} \PY{o}{=} \PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+          \PY{c+c1}{// draw the histogram}
+          \PY{n}{histogram\PYZus{}3\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{DrawClone}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+          
+        \PY{c+cm}{/* \PYZhy{} Create a new ROOT file for output}
+        \PY{c+cm}{   \PYZhy{} Note that this file may contain any kind of ROOT objects, histograms,}
+        \PY{c+cm}{     pictures, graphics objects etc.}
+        \PY{c+cm}{   \PYZhy{} the new file is now becoming the current directory */}
+          \PY{n}{TFile} \PY{o}{*}\PY{n}{file\PYZus{}3\PYZus{}1} \PY{o}{=} \PY{k}{new} \PY{n}{TFile}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ExampleMacro.root}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{RECREATE}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ExampleMacro}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        
+          \PY{c+c1}{// write Histogram to current directory (i.e. the file just opened)}
+          \PY{n}{histogram\PYZus{}3\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Write}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        
+          \PY{c+c1}{// Close the file.}
+          \PY{c+c1}{//   (You may inspect your histogram in the file using the TBrowser class)}
+          \PY{n}{file\PYZus{}3\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Close}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+          
+          \PY{n}{mycanvas}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+        
+        
+        \PY{k+kt}{void} \PY{n}{StandaloneApplication}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+          \PY{c+c1}{// ==\PYZgt{}\PYZgt{} this application calls the ROOT macro}
+          \PY{n}{ExampleMacro\PYZus{}GUI}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{StandaloneApplication}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{3-ROOT-Macros_files/3-ROOT-Macros_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Compile the code with:
+
+\begin{verbatim}
+g++ -o ExampleMacro_GUI ExampleMacro_GUI 'root-config --cflags --libs'
+\end{verbatim}
+
+and execute the program with
+
+\begin{verbatim}
+> ./ExampleMacro_GUI
+\end{verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

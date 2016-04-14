@@ -1,0 +1,668 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{5-Histograms}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Histograms play a fundamental role in any type of physics analysis, not
+only to visualise measurements but being a powerful form of data
+reduction. ROOT offers many classes that represent histograms, all
+inheriting from the
+\href{https://root.cern.ch/doc/master/classTH1.html}{\texttt{TH1}}
+class. We will focus in this chapter on uni- and bi- dimensional
+histograms the bin contents of which are represented by floating point
+numbers the
+\href{https://root.cern.ch/doc/master/classTH1F.html}{\texttt{TH1F}} and
+\href{https://root.cern.ch/doc/master/classTH2F.html}{\texttt{TH2F}}
+classes respectively. To optimise the memory usage you might go for one
+byte
+(\href{https://root.cern.ch/doc/master/classTH1C.html}{\texttt{TH1C}}),
+short
+(\href{https://root.cern.ch/doc/master/classTH1S.html}{\texttt{TH1S}}),
+integer
+(\href{https://root.cern.ch/doc/master/classTH1I.html}{\texttt{TH1I}})
+or double-precision
+(\href{https://root.cern.ch/doc/master/classTH1D.html}{\texttt{TH1D}})
+bin-content.
+
+\subsection{5.1 Your First Histogram}\label{your-first-histogram}
+
+Let's suppose you want to measure the counts of a Geiger detector
+located in proximity of a radioactive source in a given time interval.
+This would give you an idea of the activity of your source. The count
+distribution in this case is a Poisson distribution. Let's see how
+operatively you can fill and draw a histogram with the following example
+macro.
+
+The result of a counting (pseudo) experiment. Only bins corresponding to
+integer values are filled given the discrete nature of the poissonian
+distribution.
+
+Using histograms is rather simple. The main differences with respect to
+graphs that emerge from the example are:
+
+\begin{itemize}
+\tightlist
+\item
+  In the begining the histograms have a name and a title right from the
+  start, no predefined number of entries but a number of bins and a
+  lower-upper range.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{o}{\PYZpc{}}\PY{n}{jsroot} \PY{n}{on}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{auto} \PY{n}{cnt\PYZus{}r\PYZus{}h}\PY{o}{=}\PY{k}{new} \PY{n}{TH1F}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZus{}rate}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+                        \PY{l+s}{\PYZdq{}}\PY{l+s}{Count Rate;N\PYZus{}\PYZob{}Counts\PYZcb{};\PYZsh{} occurencies}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+                        \PY{l+m+mi}{100}\PY{p}{,} \PY{c+c1}{// Number of Bins}
+                        \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{c+c1}{// Lower X Boundary}
+                        \PY{l+m+mf}{15.5}\PY{p}{)}\PY{p}{;} \PY{c+c1}{// Upper X Boundary}
+        
+            \PY{k}{auto} \PY{n}{mean\PYZus{}count}\PY{o}{=}\PY{l+m+mf}{3.6f}\PY{p}{;}
+            \PY{n}{TRandom3} \PY{n}{rndgen\PYZus{}5\PYZus{}1}\PY{p}{;}
+            \PY{c+c1}{// simulate the measurements}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  During each loop of the following for an entry is stored in the
+  histogram through the TH1F::Fill method.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{imeas}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{;}\PY{n}{imeas}\PY{o}{\PYZlt{}}\PY{l+m+mi}{400}\PY{p}{;}\PY{n}{imeas}\PY{o}{+}\PY{o}{+}\PY{p}{)}
+                \PY{n}{cnt\PYZus{}r\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Fill}\PY{p}{(}\PY{n}{rndgen\PYZus{}5\PYZus{}1}\PY{p}{.}\PY{n}{Poisson}\PY{p}{(}\PY{n}{mean\PYZus{}count}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+        
+            \PY{k}{auto} \PY{n}{canvas\PYZus{}5\PYZus{}1}\PY{o}{=} \PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            \PY{n}{cnt\PYZus{}r\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        
+            \PY{k}{auto} \PY{n}{canvas\PYZus{}5\PYZus{}2}\PY{o}{=} \PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  The histogram can be drawn also normalised, ROOT automatically takes
+  cares of the necessary rescaling.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{cnt\PYZus{}r\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{DrawNormalized}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  This small snippet shows how easy it is to access the moments and
+  associated errors of a histogram.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{// Print summary}
+            \PY{n}{cout} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{Moments of Distribution:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}
+                 \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ \PYZhy{} Mean     = }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{cnt\PYZus{}r\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetMean}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ +\PYZhy{} }\PY{l+s}{\PYZdq{}}
+                                     \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{cnt\PYZus{}r\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetMeanError}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}
+                 \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ \PYZhy{} Std Dev  = }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{cnt\PYZus{}r\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetStdDev}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ +\PYZhy{} }\PY{l+s}{\PYZdq{}}
+                                     \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{cnt\PYZus{}r\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetStdDevError}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}
+                 \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ \PYZhy{} Skewness = }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{cnt\PYZus{}r\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetSkewness}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}
+                 \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ \PYZhy{} Kurtosis = }\PY{l+s}{\PYZdq{}} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{n}{cnt\PYZus{}r\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetKurtosis}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{\PYZlt{}} \PY{l+s}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s}{\PYZdq{}}\PY{p}{;}
+            
+            \PY{n}{canvas\PYZus{}5\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            \PY{n}{canvas\PYZus{}5\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Moments of Distribution:
+ - Mean     = 3.5625 +- 0.0895976
+ - Std Dev  = 1.79195 +- 0.0633551
+ - Skewness = 0.326374
+ - Kurtosis = -0.242483
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \subsection{5.2 Add and Divide
+Histograms}\label{add-and-divide-histograms}
+
+Quite a large number of operations can be carried out with histograms.
+The most useful are addition and division. In the following macro we
+will learn how to manage these procedures within ROOT.
+
+Some lines now need a bit of clarification:
+
+\begin{itemize}
+\tightlist
+\item
+  Cling, as we know, is also able to interpret more than one function
+  per file. In this case the format\_h function simply sets up some
+  parameters to conveniently set the line of histograms.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{o}{\PYZpc{}}\PY{o}{\PYZpc{}}\PY{n}{cpp} \PY{o}{\PYZhy{}}\PY{n}{d}
+        \PY{c+c1}{// Divide and add 1D Histograms}
+        
+        \PY{k+kt}{void} \PY{n}{format\PYZus{}h}\PY{p}{(}\PY{n}{TH1F}\PY{o}{*} \PY{n}{h}\PY{p}{,} \PY{k+kt}{int} \PY{n}{linecolor}\PY{p}{)}\PY{p}{\PYZob{}}
+            \PY{n}{h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetLineWidth}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{;}
+            \PY{n}{h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetLineColor}\PY{p}{(}\PY{n}{linecolor}\PY{p}{)}\PY{p}{;}
+            \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{auto} \PY{n}{sig\PYZus{}h}\PY{o}{=}\PY{k}{new} \PY{n}{TH1F}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{sig\PYZus{}h}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Signal Histo}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{;}
+            \PY{k}{auto} \PY{n}{gaus\PYZus{}h1}\PY{o}{=}\PY{k}{new} \PY{n}{TH1F}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{gaus\PYZus{}h1}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Gauss Histo 1}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{;}
+            \PY{k}{auto} \PY{n}{gaus\PYZus{}h2}\PY{o}{=}\PY{k}{new} \PY{n}{TH1F}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{gaus\PYZus{}h2}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Gauss Histo 2}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{;}
+            \PY{k}{auto} \PY{n}{bkg\PYZus{}h}\PY{o}{=}\PY{k}{new} \PY{n}{TH1F}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{exp\PYZus{}h}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Exponential Histo}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{;}
+        
+            \PY{c+c1}{// simulate the measurements}
+            \PY{n}{TRandom3} \PY{n}{rndgen\PYZus{}5\PYZus{}2}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Here some C++ syntax for conditional statements is used to fill the
+  histograms with different numbers of entries inside the loop.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{imeas}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{;} \PY{n}{imeas}\PY{o}{\PYZlt{}}\PY{l+m+mi}{4000}\PY{p}{;} \PY{n}{imeas}\PY{o}{+}\PY{o}{+}\PY{p}{)}\PY{p}{\PYZob{}}
+                \PY{n}{bkg\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Fill}\PY{p}{(}\PY{n}{rndgen\PYZus{}5\PYZus{}2}\PY{p}{.}\PY{n}{Exp}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+                \PY{k}{if} \PY{p}{(}\PY{n}{imeas}\PY{o}{\PYZpc{}}\PY{l+m+mi}{4}\PY{o}{=}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{n}{gaus\PYZus{}h1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Fill}\PY{p}{(}\PY{n}{rndgen\PYZus{}5\PYZus{}2}\PY{p}{.}\PY{n}{Gaus}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+                \PY{k}{if} \PY{p}{(}\PY{n}{imeas}\PY{o}{\PYZpc{}}\PY{l+m+mi}{4}\PY{o}{=}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{n}{gaus\PYZus{}h2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Fill}\PY{p}{(}\PY{n}{rndgen\PYZus{}5\PYZus{}2}\PY{p}{.}\PY{n}{Gaus}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+                \PY{k}{if} \PY{p}{(}\PY{n}{imeas}\PY{o}{\PYZpc{}}\PY{l+m+mi}{10}\PY{o}{=}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{n}{sig\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Fill}\PY{p}{(}\PY{n}{rndgen\PYZus{}5\PYZus{}2}\PY{p}{.}\PY{n}{Gaus}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mf}{.5}\PY{p}{)}\PY{p}{)}\PY{p}{;}\PY{p}{\PYZcb{}}
+            
+            \PY{c+c1}{// Format Histograms}
+            \PY{k+kt}{int} \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{;}
+            \PY{k}{for} \PY{p}{(}\PY{k}{auto} \PY{n+nl}{hist} \PY{p}{:} \PY{p}{\PYZob{}}\PY{n}{sig\PYZus{}h}\PY{p}{,}\PY{n}{bkg\PYZus{}h}\PY{p}{,}\PY{n}{gaus\PYZus{}h1}\PY{p}{,}\PY{n}{gaus\PYZus{}h2}\PY{p}{\PYZcb{}}\PY{p}{)}
+                \PY{n}{format\PYZus{}h}\PY{p}{(}\PY{n}{hist}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)}\PY{p}{;}
+        
+            \PY{c+c1}{// Sum}
+            \PY{k}{auto} \PY{n}{sum\PYZus{}h}\PY{o}{=} \PY{k}{new} \PY{n}{TH1F}\PY{p}{(}\PY{o}{*}\PY{n}{bkg\PYZus{}h}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Here the sum of two histograms. A weight, which can be negative, can
+  be assigned to the added histogram.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{sum\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Add}\PY{p}{(}\PY{n}{sig\PYZus{}h}\PY{p}{,}\PY{l+m+mf}{1.}\PY{p}{)}\PY{p}{;}
+            \PY{n}{sum\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Exponential + Gaussian;X variable;Y variable}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{format\PYZus{}h}\PY{p}{(}\PY{n}{sum\PYZus{}h}\PY{p}{,}\PY{n}{kBlue}\PY{p}{)}\PY{p}{;}
+        
+            \PY{k}{auto} \PY{n}{canvas\PYZus{}5\PYZus{}2\PYZus{}sum}\PY{o}{=} \PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            \PY{n}{sum\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{hist}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{bkg\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{SameHist}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n}{sig\PYZus{}h}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{SameHist}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  The division of two histograms is rather straightforward.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{// Divide}
+             \PY{k}{auto} \PY{n}{dividend}\PY{o}{=}\PY{k}{new} \PY{n}{TH1F}\PY{p}{(}\PY{o}{*}\PY{n}{gaus\PYZus{}h1}\PY{p}{)}\PY{p}{;}
+             \PY{n}{dividend}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Divide}\PY{p}{(}\PY{n}{gaus\PYZus{}h2}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  When you draw two quantities and their ratios, it is much better if
+  all the information is condensed in one single plot. These lines
+  provide a skeleton to perform this operation.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{// Graphical Maquillage}
+             \PY{n}{dividend}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{;X axis;Gaus Histo 1 / Gaus Histo 2}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+             \PY{n}{format\PYZus{}h}\PY{p}{(}\PY{n}{dividend}\PY{p}{,}\PY{n}{kOrange}\PY{p}{)}\PY{p}{;}
+             \PY{n}{gaus\PYZus{}h1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetTitle}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{;;Gaus Histo 1 and Gaus Histo 2}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+             \PY{n}{gStyle}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetOptStat}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{;}
+         
+             \PY{n}{TCanvas}\PY{o}{*} \PY{n}{canvas\PYZus{}5\PYZus{}2\PYZus{}divide}\PY{o}{=} \PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}2\PYZus{}divide}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Divide}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}2\PYZus{}divide}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}2\PYZus{}divide}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetPad}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetRightMargin}\PY{p}{(}\PY{l+m+mf}{.01}\PY{p}{)}\PY{p}{;}
+             \PY{n}{gaus\PYZus{}h1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{DrawNormalized}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Hist}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+             \PY{n}{gaus\PYZus{}h2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{DrawNormalized}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{HistSame}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+         
+             \PY{n}{canvas\PYZus{}5\PYZus{}2\PYZus{}divide}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+             \PY{n}{dividend}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetYaxis}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetRangeUser}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{2.49}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}2\PYZus{}divide}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetPad}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetGridy}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}2\PYZus{}divide}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{GetPad}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetRightMargin}\PY{p}{(}\PY{l+m+mf}{.01}\PY{p}{)}\PY{p}{;}
+             \PY{n}{dividend}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+             
+             \PY{n}{canvas\PYZus{}5\PYZus{}2\PYZus{}sum}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}2\PYZus{}divide}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \subsection{5.3 Two-dimensional
+Histograms}\label{two-dimensional-histograms}
+
+Two-dimensional histograms are a very useful tool, for example to
+inspect correlations between variables. You can exploit the
+bi-dimensional histogram classes provided by ROOT in a simple way. Let's
+see how in this code:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{// Draw a Bidimensional Histogram in many ways}
+         \PY{c+c1}{// together with its profiles and projections}
+         
+             \PY{n}{gStyle}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetPalette}\PY{p}{(}\PY{n}{kBird}\PY{p}{)}\PY{p}{;}
+             \PY{n}{gStyle}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetOptStat}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{;}
+             \PY{n}{gStyle}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetOptTitle}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{;}
+         
+             \PY{n}{TH2F} \PY{n}{bidi\PYZus{}h}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{bidi\PYZus{}h}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{2D Histo;Gaussian Vals;Exp. Vals}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+                         \PY{l+m+mi}{30}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}  \PY{c+c1}{// X axis}
+                         \PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{;} \PY{c+c1}{// Y axis}
+         
+             \PY{n}{TRandom3} \PY{n}{rgen\PYZus{}5\PYZus{}3}\PY{p}{;}
+             \PY{k}{for} \PY{p}{(}\PY{k+kt}{int} \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{;}\PY{n}{i}\PY{o}{\PYZlt{}}\PY{l+m+mi}{500000}\PY{p}{;}\PY{n}{i}\PY{o}{+}\PY{o}{+}\PY{p}{)}
+                 \PY{n}{bidi\PYZus{}h}\PY{p}{.}\PY{n}{Fill}\PY{p}{(}\PY{n}{rgen\PYZus{}5\PYZus{}3}\PY{p}{.}\PY{n}{Gaus}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{10}\PY{o}{\PYZhy{}}\PY{n}{rgen\PYZus{}5\PYZus{}3}\PY{p}{.}\PY{n}{Exp}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}\PY{l+m+mf}{.1}\PY{p}{)}\PY{p}{;}
+         
+             \PY{k}{auto} \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}1}\PY{o}{=}\PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{canvas\PYZus{}5\PYZus{}3}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{canvas\PYZus{}5\PYZus{}3}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{800}\PY{p}{,}\PY{l+m+mi}{800}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Divide}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}\PY{n}{bidi\PYZus{}h}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Cont1}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}\PY{n}{bidi\PYZus{}h}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Colz}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{;}\PY{n}{bidi\PYZus{}h}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{lego2}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{;}\PY{n}{bidi\PYZus{}h}\PY{p}{.}\PY{n}{DrawClone}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{surf3}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+         
+             \PY{c+c1}{// Profiles and Projections}
+             \PY{k}{auto} \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}2}\PY{o}{=}\PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{canvas\PYZus{}5\PYZus{}3\PYZus{}2}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{canvas\PYZus{}5\PYZus{}3\PYZus{}2}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{800}\PY{p}{,}\PY{l+m+mi}{800}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Divide}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}\PY{n}{bidi\PYZus{}h}\PY{p}{.}\PY{n}{ProjectionX}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{DrawClone}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}\PY{n}{bidi\PYZus{}h}\PY{p}{.}\PY{n}{ProjectionY}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{DrawClone}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{;}\PY{n}{bidi\PYZus{}h}\PY{p}{.}\PY{n}{ProfileX}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{DrawClone}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{cd}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{;}\PY{n}{bidi\PYZus{}h}\PY{p}{.}\PY{n}{ProfileY}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{DrawClone}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+             
+             \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+             \PY{n}{canvas\PYZus{}5\PYZus{}3\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    Two kinds of plots are provided within the code, the first one
+containing three-dimensional representations and the second one
+projections and profiles of the bi-dimensional histogram.
+
+The projections and profiles of bi-dimensional histograms.
+
+When a projection is performed along the x (y) direction, for every bin
+along the x (y) axis, all bin contents along the y (x) axis are summed
+up. When a profile is performed along the x (y) direction, for every bin
+along the x (y) axis, the average of all the bin contents along the y
+(x) is calculated together with their RMS and displayed as a symbol with
+error bar.
+
+Correlations between the variables are quantified by the methods
+\texttt{Double\_t\ GetCovariance()} and
+\texttt{Double\_t\ GetCorrelationFactor()}.
+
+\subsection{5.4 Multiple histograms}\label{multiple-histograms}
+
+The class \texttt{THStack} allows to manipulate a set of histograms as a
+single entity. It is a collection of \texttt{TH1} (or derived) objects.
+When drawn, the X and Y axis ranges are automatically computed such as
+all the histograms will be visible. Several drawing option are available
+for both 1D and 2D histograms. The next macros shows how it looks for 2D
+histograms:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{// Example of stacked histograms using the class THStack}
+            \PY{k}{auto} \PY{n}{canvas\PYZus{}5\PYZus{}4}\PY{o}{=}\PY{k}{new} \PY{n}{TCanvas}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{canvas\PYZus{}5\PYZus{}4}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{canvas\PYZus{}5\PYZus{}4}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{900}\PY{p}{,} \PY{l+m+mi}{700}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Here we create the stack.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{THStack} \PY{o}{*}\PY{n}{stHistogram\PYZus{}5\PYZus{}4} \PY{o}{=} \PY{k}{new} \PY{n}{THStack}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{stHistogram\PYZus{}5\PYZus{}4}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Stacked 2D histograms}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Here we create two histograms to be added in the stack.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{TF2} \PY{o}{*}\PY{n}{f1} \PY{o}{=} \PY{k}{new} \PY{n}{TF2}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{f1}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{xygaus + xygaus(5) + xylandau(10)}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{;}
+            \PY{n}{Double\PYZus{}t} \PY{n}{params1}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{130}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.4}\PY{p}{,}\PY{l+m+mf}{1.8}\PY{p}{,}\PY{l+m+mf}{1.5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{3600}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mf}{0.7}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{\PYZcb{}}\PY{p}{;}
+            \PY{n}{f1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetParameters}\PY{p}{(}\PY{n}{params1}\PY{p}{)}\PY{p}{;}
+            \PY{n}{TH2F} \PY{o}{*}\PY{n}{histogram\PYZus{}5\PYZus{}4\PYZus{}1} \PY{o}{=} \PY{k}{new} \PY{n}{TH2F}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{histogram\PYZus{}5\PYZus{}4\PYZus{}1}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{histogram\PYZus{}5\PYZus{}4\PYZus{}1}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{;}
+            \PY{n}{histogram\PYZus{}5\PYZus{}4\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetFillColor}\PY{p}{(}\PY{l+m+mi}{38}\PY{p}{)}\PY{p}{;}
+            \PY{n}{histogram\PYZus{}5\PYZus{}4\PYZus{}1}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{FillRandom}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{f1}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{4000}\PY{p}{)}\PY{p}{;}
+         
+            \PY{n}{TF2} \PY{o}{*}\PY{n}{f2} \PY{o}{=} \PY{k}{new} \PY{n}{TF2}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{f2}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{xygaus + xygaus(5)}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{;}
+            \PY{n}{Double\PYZus{}t} \PY{n}{params2}\PY{p}{[}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{100}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.4}\PY{p}{,}\PY{l+m+mf}{1.9}\PY{p}{,}\PY{l+m+mf}{1.1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mf}{0.7}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{\PYZcb{}}\PY{p}{;}
+            \PY{n}{f2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetParameters}\PY{p}{(}\PY{n}{params2}\PY{p}{)}\PY{p}{;}
+            \PY{n}{TH2F} \PY{o}{*}\PY{n}{histogram\PYZus{}5\PYZus{}4\PYZus{}2} \PY{o}{=} \PY{k}{new} \PY{n}{TH2F}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{histogram\PYZus{}5\PYZus{}4\PYZus{}2}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{histogram\PYZus{}5\PYZus{}4\PYZus{}2}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{;}
+            \PY{n}{histogram\PYZus{}5\PYZus{}4\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{SetFillColor}\PY{p}{(}\PY{l+m+mi}{46}\PY{p}{)}\PY{p}{;}
+            \PY{n}{histogram\PYZus{}5\PYZus{}4\PYZus{}2}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{FillRandom}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{f2}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{3000}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Here we add the histograms in the stack.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{stHistogram\PYZus{}5\PYZus{}4}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Add}\PY{p}{(}\PY{n}{histogram\PYZus{}5\PYZus{}4\PYZus{}1}\PY{p}{)}\PY{p}{;}
+            \PY{n}{stHistogram\PYZus{}5\PYZus{}4}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Add}\PY{p}{(}\PY{n}{histogram\PYZus{}5\PYZus{}4\PYZus{}2}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Finally we draw the stack as a lego plot. In which the colour
+  distinguish the two histograms.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{stHistogram\PYZus{}5\PYZus{}4}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            \PY{n}{canvas\PYZus{}5\PYZus{}4}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{Draw}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
