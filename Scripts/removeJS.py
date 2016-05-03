@@ -24,12 +24,15 @@ cells_new=[]
 offset = 0
 for cell in nb.cells:
   if cell["cell_type"] == "code":
-    if cell["source"] == '%%jsroot on':
+    if cell["source"] == '%jsroot on':
       offset = -1
     else: 
       cells_new.append(new_code_cell(
       source=cell.source,
+      metadata=cell.metadata,
+      outputs=[],
       execution_count=cell.execution_count+offset))
+      # print cell.execution_count+offset
   elif cell["cell_type"] == "markdown":
     cells_new.append(new_markdown_cell(
     source=cell.source,
