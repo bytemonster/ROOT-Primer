@@ -31,6 +31,7 @@ for cell in nb.cells:
       source=cell.source,
       metadata=cell.metadata,
       outputs=[],
+      # print cell.execution_count
       execution_count=cell.execution_count+offset))
       # print cell.execution_count+offset
   elif cell["cell_type"] == "markdown":

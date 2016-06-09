@@ -21,7 +21,7 @@ firstimport = last_text.sub('',firstitem)
 
 finaltext =  firstimport
 first.close()
-for i in range(2,len(sys.argv)-1):
+for i in range(2,len(sys.argv)):
 	next=open(sys.argv[i], 'r')
 	nextimport=next.read()
 	nextimportcontents=finregex.search(nextimport)

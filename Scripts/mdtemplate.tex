@@ -19,7 +19,7 @@ $endif$
  }
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
+% \usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
   \usepackage[utf8]{inputenc}
@@ -138,6 +138,15 @@ $if(graphics)$
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Overwrite \begin{figure}[htbp] with \begin{figure}[H]
+\usepackage{float}
+\let\origfigure=\figure
+\let\endorigfigure=\endfigure
+\renewenvironment{figure}[1][]{%
+\origfigure[H]
+}{%
+\endorigfigure
+}
 $endif$
 $if(links-as-notes)$
 % Make links footnotes instead of hotlinks:
@@ -239,9 +248,6 @@ $endif$
 $if(lot)$
 \listoftables
 $endif$
-$if(lof)$
-\listoffigures
-$endif$
 $body$
 
 $if(natbib)$
@@ -265,4 +271,7 @@ $for(include-after)$
 $include-after$
 
 $endfor$
+
+\listoffigures
+
 \end{document}
