@@ -29,7 +29,6 @@ for tag in soup.findAll('div'):
 					child.contents[0].replace_with(str(child.contents[0]).replace('root_plot','root_plot'+'_'+chapter))
 					# print(child.contents)
 
-
 # print(soup)
 m.write(soup.prettify())
 
