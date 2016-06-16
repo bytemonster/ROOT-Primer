@@ -1,3 +1,4 @@
+#!/usr/local/bin/python
 import string
 import sys
 import json

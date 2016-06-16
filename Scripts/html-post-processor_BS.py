@@ -1,3 +1,4 @@
+#!/usr/local/bin/python
 # prepares the html files for appending
 
 from bs4 import BeautifulSoup

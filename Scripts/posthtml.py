@@ -1,3 +1,4 @@
+#!/usr/local/bin/python
 # Edits and appends the html files 
 
 import sys

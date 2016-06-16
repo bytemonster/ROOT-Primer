@@ -18,7 +18,7 @@ then
 	for name in $NBLISTHTML ;do
 	 	# python addtitle.py $NBDIR/$name"$NBEXT"
 		jupyter nbconvert --ExecutePreprocessor.timeout=600 --to html $NBDIR/$name"$NBEXT"
-		python html-post-prossesor_BS.py $NBDIR/$name"$HTML" $NBDIR/$name.prep"$HTML" $chapter
+		python html-post-processor_BS.py $NBDIR/$name"$HTML" $NBDIR/$name.prep"$HTML" $chapter
 		python posthtml.py $NBDIR/$name.prep"$HTML" 
 		let chapter=chapter+1
 	done
