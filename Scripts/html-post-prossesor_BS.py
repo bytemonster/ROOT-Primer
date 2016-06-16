@@ -13,7 +13,7 @@ f = open(infilename, 'r')
 
 m= open(outfilename, 'w')
 final_file = open('../notebooks/final.html', 'w')
-soup = BeautifulSoup(f.read(),"html.parser")
+soup = BeautifulSoup(f.read().decode('utf-8'),"html.parser")
 divtags = soup.findAll('div')
 for tag in soup.findAll('div'):
 	if 'id' in tag.attrs:
@@ -30,6 +30,6 @@ for tag in soup.findAll('div'):
 					# print(child.contents)
 
 # print(soup)
-m.write(soup.prettify())
+m.write(soup.prettify().encode('utf-8'))
 
  
