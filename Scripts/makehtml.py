@@ -3,18 +3,25 @@
 import sys
 import string
 import re
+import os
 
 def rchop(thestring, ending):
   if thestring.endswith(ending):
     return thestring[:-len(ending)]
   return thestring
 
+script_dir = os.path.dirname(__file__)
+
+
+rel_path = "../notebooks/final.html"
+abs_file_path = os.path.join(script_dir, rel_path)
+
 finregex=re.compile("<body>(?P<bodyText>[\s\S]*)</body>")
 last_text=re.compile("</body>[\s\S]*</html>[\s\S]*")
 files_no = len(sys.argv)
 infilenames=[]
 
-final = open('../final.html', 'w')
+final = open(abs_file_path, 'w')
 first =open(sys.argv[1], 'r')
 firstitem=first.read()
 firstimport = last_text.sub('',firstitem)

@@ -18,8 +18,3 @@ for i in range(1,len(sys.argv)):
 	print sys.argv[i]
 	m = open(sys.argv[i], 'w')
 	m.write(iteration2)
-# print infilenames
-# newfile= open(infilenames[1],'r')
-# newcontents=newfile.read()
-# parts = newcontents.split('<body>')
-# print parts[1]

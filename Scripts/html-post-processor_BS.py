@@ -4,16 +4,24 @@
 from bs4 import BeautifulSoup
 import sys
 import string
-
+import os
 
 
 infilename = sys.argv[1]
 outfilename = sys.argv[2]
 chapter = sys.argv[3]
-f = open(infilename, 'r')
 
-m= open(outfilename, 'w')
-final_file = open('../notebooks/final.html', 'w')
+script_dir = os.path.dirname(__file__) 
+rel_path = "../notebooks"
+abs_path = os.path.join(script_dir, rel_path)
+abs_in_path = os.path.join(abs_path, infilename)
+abs_out_path = os.path.join(abs_path, outfilename)
+abs_final_path = os.path.join(abs_path, "final.html")
+
+f = open(abs_in_path, 'r')
+m= open(abs_out_path, 'w')
+
+final_file = open(abs_final_path, 'w')
 soup = BeautifulSoup(f.read().decode('utf-8'),"html.parser")
 divtags = soup.findAll('div')
 for tag in soup.findAll('div'):
