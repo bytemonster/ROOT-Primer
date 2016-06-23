@@ -13,7 +13,7 @@ def rchop(thestring, ending):
 script_dir = os.path.dirname(__file__)
 
 
-rel_path = "../notebooks/final.html"
+rel_path = "../notebooks/ROOT-Primer.html"
 abs_file_path = os.path.join(script_dir, rel_path)
 
 finregex=re.compile("<body>(?P<bodyText>[\s\S]*)</body>")
