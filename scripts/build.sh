@@ -106,7 +106,7 @@ EOF
 	for name in $NBLISTPDF ;do
 	 	python $BASEDIR/removeJS.py $NBDIR/$name$NBEXT $NBDIR/"$name"_NOJS"$NBEXT";
 		jupyter nbconvert --ExecutePreprocessor.timeout=2000 --to notebook --execute $NBDIR/"$name"_NOJS"$NBEXT";
-		jupyter nbconvert  --to markdown $NBDIR/"$name"_NOJS"$NBEXTNEW" --log-level=DEBUG --template='mytemplate.tpl' ;
+		jupyter nbconvert  --to markdown $NBDIR/"$name"_NOJS"$NBEXTNEW" --template='mytemplate.tpl' ;
 	done
 	rm mytemplate.tpl
 	cd $NBDIR
@@ -121,4 +121,3 @@ if [ "$1" != "html" ] && [ "$1" != "all" ] && [ "$1" != "pdf" ]
 then
 	echo "Wrong arguments. Accepted arguments are: pdf, html, all"
 fi
-
