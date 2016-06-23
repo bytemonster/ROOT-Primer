@@ -28,7 +28,7 @@ then
 		let chapter=chapter+1
 	done
 	python $BASEDIR/makehtml.py $NBDIR/*.prep.html
-	find $NBDIR -type f -name "*.html" -and -not -name "final.html" | xargs rm
+	find $NBDIR -type f -name "*.html" -and -not -name "ROOT-Primer.html" | xargs rm
 	# rm $NBDIR/*.html
 fi
 if [ "$1" = "pdf" ] || [ "$1" = "all" ]
