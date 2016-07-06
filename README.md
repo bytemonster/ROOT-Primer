@@ -18,3 +18,6 @@ Dependencies:
 
 ![Open in Swan](./notebooks/images/open_in_swan_button.png)
 
+.. |open-swan| image::  https://img.shields.io/badge/Open%20in-SWAN-orange.svg
+    :target: https://swan002.cern.ch/?projurl=https://github.com/dpiparo/swanExamples.git
+    :alt: Open in SWAN
