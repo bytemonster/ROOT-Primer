@@ -14,3 +14,7 @@ Dependencies:
 
 
 ****** Please make sure to NUMBER the notebooks according to their possition in the final primer. For example: 0-TOC.ipynb 1-First-Chapter.ipynb etc *******
+
+
+![Open in Swan](./notebooks/images/open_in_swan_button.png)
+
