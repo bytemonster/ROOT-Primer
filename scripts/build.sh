@@ -96,7 +96,9 @@ cat > mytemplate.tpl<< EOF
 {% endblock data_text %}
 
 {% block markdowncell scoped %}
+{% if 'remove' not in cell.metadata %}
 {{ cell.source }}
+{% endif %}
 {% endblock markdowncell %}
 
 {% block unknowncell scoped %}

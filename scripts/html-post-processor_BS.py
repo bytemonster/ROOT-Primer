@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import sys
 import string
 import os
+import re
 
 
 infilename = sys.argv[1]
@@ -18,12 +19,21 @@ abs_in_path = os.path.join(abs_path, infilename)
 abs_out_path = os.path.join(abs_path, outfilename)
 abs_final_path = os.path.join(abs_path, "final.html")
 
+############ OPEN FILES ############
 f = open(abs_in_path, 'r')
 m= open(abs_out_path, 'w')
-
 final_file = open(abs_final_path, 'w')
+
+############ PARSE TEXT ############
 soup = BeautifulSoup(f.read().decode('utf-8'),"html.parser")
+############ SELECT ALL DIVS ############
 divtags = soup.findAll('div')
+
+ROOT_Primer_nav = soup.find_all(text=re.compile('ROOT-Primer Navigator'))
+paragraphs = [nav.parent for nav in ROOT_Primer_nav]
+divs = [paragraph.parent for paragraph in paragraphs]
+
+############ EDIT BASED ON METADATA ############
 for tag in soup.findAll('div'):
 	if 'id' in tag.attrs:
 		# print(tag.attrs['id'])
@@ -37,6 +47,9 @@ for tag in soup.findAll('div'):
 					# print(child.contents)
 					child.contents[0].replace_with(str(child.contents[0]).replace('root_plot','root_plot'+'_'+chapter))
 					# print(child.contents)
+	if tag in divs:
+		tag.decompose()
+
 
 # print(soup)
 m.write(soup.prettify().encode('utf-8'))
