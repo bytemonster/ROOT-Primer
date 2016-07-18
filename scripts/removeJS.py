@@ -2,9 +2,19 @@
 import string
 import sys
 import json
-import nbformat
+
+try:
+	import nbformat
+except ImportError as err:
+	print("The Python API Nbformat is not installed. To install it visit https://github.com/jupyter/nbformat. \n OS error: {0}".format(err))
+	raise
+
 from nbformat import NotebookNode
-from nbconvert.preprocessors import ExecutePreprocessor
+try:
+    from nbconvert.preprocessors import ExecutePreprocessor
+except ImportError as err:
+	print("Nbconvert is not installed. To install it use: \n pip install nbconvert \n or visit: http://nbconvert.readthedocs.io/en/latest/install.html. \n OS error: {0}".format(err))
+	raise
 from StringIO import StringIO
 import codecs
 from nbformat.v4.nbbase import (
@@ -27,7 +37,7 @@ for cell in nb.cells:
   if cell["cell_type"] == "code":
     if cell["source"] == '%jsroot on':
       offset = -1
-    else: 
+    else:
       cells_new.append(new_code_cell(
       source=cell.source,
       metadata=cell.metadata,
@@ -45,7 +55,7 @@ for cell in nb.cells:
     metadata=cell.metadata))
 
   # print cell.cell_type
-  
+
 nb_new = new_notebook(cells=cells_new,
     metadata=nb.metadata,
     nbformat=nb.nbformat,

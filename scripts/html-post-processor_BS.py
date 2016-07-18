@@ -1,7 +1,11 @@
 #!/usr/local/bin/python
 # prepares the html files for appending
 
-from bs4 import BeautifulSoup
+try:
+	from bs4 import BeautifulSoup
+except ImportError as err:
+	print("BeautifulSoup is not installed. To install it use apt-get install python-bs4 or visit https://www.crummy.com/software/BeautifulSoup/ for more information. \n OS error: {0}".format(err))
+	raise
 import sys
 import string
 import os
@@ -12,7 +16,7 @@ infilename = sys.argv[1]
 outfilename = sys.argv[2]
 chapter = sys.argv[3]
 
-script_dir = os.path.dirname(__file__) 
+script_dir = os.path.dirname(__file__)
 rel_path = "../notebooks"
 abs_path = os.path.join(script_dir, rel_path)
 abs_in_path = os.path.join(abs_path, infilename)
@@ -53,5 +57,3 @@ for tag in soup.findAll('div'):
 
 # print(soup)
 m.write(soup.prettify().encode('utf-8'))
-
- 
