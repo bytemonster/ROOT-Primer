@@ -2,7 +2,7 @@
 # prepares the html files for appending
 
 try:
-	from bs4 import BeautifulSoup
+	from bssdv4 import BeautifulSoup
 except ImportError as err:
 	print("BeautifulSoup is not installed. To install it use apt-get install python-bs4 or visit https://www.crummy.com/software/BeautifulSoup/ for more information. \n OS error: {0}".format(err))
 	raise
