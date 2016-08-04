@@ -2,6 +2,7 @@
 import string
 import sys
 import json
+import StringIO
 
 try:
 	import nbformat
@@ -33,6 +34,7 @@ nb_new = nbformat.NotebookNode()
 
 cells_new=[]
 offset = 0
+reright=0
 for cell in nb.cells:
   if cell["cell_type"] == "code":
     if cell["source"] == '%jsroot on':
@@ -46,9 +48,23 @@ for cell in nb.cells:
       execution_count=cell.execution_count+offset))
       # print cell.execution_count+offset
   elif cell["cell_type"] == "markdown":
-    cells_new.append(new_markdown_cell(
-    source=cell.source,
-    metadata=cell.metadata))
+    if "ROOTPanel_FitPanel.png" in cell.source:
+        cells_new.append(new_markdown_cell(
+        source="\\begin{figure} \n \centering \includegraphics[width=5cm,height=10cm]{images/ROOTPanel_FitPanel.png} \n \caption{The ROOT fit panel} \n \end{figure}",
+        metadata=cell.metadata))
+        reright=1
+    elif reright==1:
+        cells_new.append(new_markdown_cell(
+        source="\\raggedright",
+        metadata=cell.metadata))
+        reright=0
+        cells_new.append(new_markdown_cell(
+        source=cell.source,
+        metadata=cell.metadata))
+    else:
+        cells_new.append(new_markdown_cell(
+        source=cell.source,
+        metadata=cell.metadata))
   else:
     cells_new.append(new_raw_cell(
     source=cell.source,
