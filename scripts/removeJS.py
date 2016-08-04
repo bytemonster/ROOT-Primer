@@ -48,9 +48,38 @@ for cell in nb.cells:
       execution_count=cell.execution_count+offset))
       # print cell.execution_count+offset
   elif cell["cell_type"] == "markdown":
-    if "ROOTPanel_FitPanel.png" in cell.source:
+    if "<img" in cell.source:
+        buf = cell.source.split("\"")
+        flag = "none"
+        src = ""
+        alt =""
+        width=""
+        height=""
+        for item in buf:
+            if flag is "none":
+                if "src" in item:
+                    flag = "src"
+                elif "alt" in item:
+                    flag = "alt"
+                elif "width=" in item:
+                    flag = "width"
+                elif "height=" in item:
+                    flag = "height"
+            else:
+                if flag is "src":
+                    src=item
+                    flag = "none"
+                elif flag is "alt":
+                    alt=item
+                    flag = "none"
+                elif flag is "width":
+                    width=item
+                    flag = "none"
+                elif flag is "height":
+                    height=item
+                    flag = "none"
         cells_new.append(new_markdown_cell(
-        source="\\begin{figure} \n \centering \includegraphics[width=5cm,height=10cm]{images/ROOTPanel_FitPanel.png} \n \caption{The ROOT fit panel} \n \end{figure}",
+        source="\\begin{figure} \n \centering \includegraphics[width=" + width +",height="+ height + "]{"+ src +"} \n \caption{" + alt +"} \n \end{figure}",
         metadata=cell.metadata))
         reright=1
     elif reright==1:
