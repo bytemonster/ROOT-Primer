@@ -14,8 +14,7 @@ NBEXT=.ipynb
 HTML=.html
 NBEXTNEW=.nbconvert.ipynb
 NBEXTMD=.nbconvert.md
-NBLISTPDF=`echo 1-Motivation-and-Introduction 2-ROOT-Basics`
-# 3-ROOT-Macros 4-Graphs 5-Histograms 6-Functions-and-Parameter-Estimation 7-File-IO-and-Parallel-Analysis 8-ROOT-in-Python 9-Concluding-Remarks`
+NBLISTPDF=`echo 1-Motivation-and-Introduction 2-ROOT-Basics 3-ROOT-Macros 4-Graphs 5-Histograms 6-Functions-and-Parameter-Estimation 7-File-IO-and-Parallel-Analysis 8-ROOT-in-Python 9-Concluding-Remarks`
 NBLISTHTML=`echo 0_ROOT_Primer_TOC 1-Motivation-and-Introduction 2-ROOT-Basics 3-ROOT-Macros 4-Graphs 5-Histograms 6-Functions-and-Parameter-Estimation 7-File-IO-and-Parallel-Analysis 8-ROOT-in-Python 9-Concluding-Remarks`
 # jupyter nbconvert
 echo $CURRENTPOS
