@@ -33,18 +33,19 @@ nb = nbformat.read(infilename, 4)
 nb_new = nbformat.NotebookNode()
 
 cells_new=[]
-offset = 0
+offset=0
 reright=0
 for cell in nb.cells:
   if cell["cell_type"] == "code":
     if cell["source"] == '%jsroot on':
       offset = -1
     else:
+      # print cell.execution_count
+      # print type(cell.execution_count)
       cells_new.append(new_code_cell(
       source=cell.source,
       metadata=cell.metadata,
       outputs=[],
-      # print cell.execution_count
       execution_count=cell.execution_count+offset))
       # print cell.execution_count+offset
   elif cell["cell_type"] == "markdown":
@@ -110,33 +111,3 @@ nb_new = new_notebook(cells=cells_new,
 with codecs.open(outfilename, encoding='utf-8', mode='w') as out:
     nbformat.write(nb_new, out)
 
-# nbformat.write(nb, fp, version=nbformat.NO_CONVERT, **kwargs)
-#################################################################
-# true=True
-# false=False
-
-# nbj = eval(text)
-
-# cells = nbj["cells"]
-
-# newcells=[]
-# jscount = 0
-# mustdecrement = False
-# for cell in cells:
-#    if cell["cell_type"] == "code":
-#       if cell["source"][0] == "%%jsroot on":
-#         mustdecrement = True
-#         jscount = 1
-#         continue
-#       else:
-#         if mustdecrement:
-#           cell["execution_count"] -= 1
-#         newcells.append(cell)
-#    else:
-#       newcells.append(cell)
-# nbj["cells"] = newcells
-
-
-# newnb = open(outfilename,"w")
-# newnb.write(str(nbj))
-# newnb.close()
