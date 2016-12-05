@@ -10,13 +10,14 @@ get_abs_filename() {
 CURRENTPOS=$(pwd)
 BASEDIR=$(cd $(dirname $BASH_SOURCE);pwd)
 NBDIR=$BASEDIR/../notebooks
+OUTPUTDIR=$1
 NBEXT=.ipynb
 HTML=.html
 NBEXTNEW=.nbconvert.ipynb
 NBEXTMD=.nbconvert.md
 NBLIST=`echo 1-Motivation-and-Introduction 2-ROOT-Basics 3-ROOT-Macros 4-Graphs 5-Histograms 6-Functions-and-Parameter-Estimation 7-File-IO-and-Parallel-Analysis 8-ROOT-in-Python 9-Concluding-Remarks`
 echo $CURRENTPOS
-if [ "$1" = "html" ] || [ "$1" = "all" ]
+if [ "$2" = "html" ] || [ "$2" = "all" ]
 then
 	chapter=0
 	for name in $NBLIST ;do
@@ -25,8 +26,9 @@ then
 	done
 	python $BASEDIR/Build_html.py $NBLIST
   find $NBDIR -type f -name "*.html" -and -not -name "ROOT-Primer.html" | xargs rm
+  cp $NBDIR/ROOT-Primer.html $OUTPUTDIR/ROOT-Primer.html
 fi
-if [ "$1" = "pdf" ] || [ "$1" = "all" ]
+if [ "$2" = "pdf" ] || [ "$2" = "all" ]
 then
 cat > mytemplate.tpl<< EOF
 {% extends 'display_priority.tpl' %}
@@ -112,8 +114,9 @@ EOF
 	rm -rf *NOJS*
 	rm $NBDIR/ROOT-Primer_v0.pdf
 	cd $CURRENTPOS
+	cp $NBDIR/ROOT-Primer.pdf $OUTPUTDIR/ROOT-Primer.pdf
 fi
-if [ "$1" != "html" ] && [ "$1" != "all" ] && [ "$1" != "pdf" ]
+if [ "$2" != "html" ] && [ "$2" != "all" ] && [ "$2" != "pdf" ]
 then
-	echo "Wrong arguments. Accepted arguments are: pdf, html, all"
+	echo "Wrong arguments. Accepted arguments are: 1rs argument location of output files - 2nd argument  pdf, html, all"
 fi
