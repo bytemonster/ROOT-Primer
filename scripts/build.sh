@@ -7,6 +7,8 @@ get_abs_filename() {
   echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
 }
 
+. /build/workspace/root-makedoc-v608/rootspi/rdoc/src/v6-08-00-patches.build/bin/thisroot.sh
+
 CURRENTPOS=$(pwd)
 BASEDIR=$(cd $(dirname $BASH_SOURCE);pwd)
 NBDIR=$BASEDIR/../notebooks
