@@ -113,10 +113,10 @@ $for(bibliography)$
 $endfor$
 $endif$
 $if(listings)$
-\usepackage{listings}
+\usepackage{listings}[xleftmargin = 5cm, backgroundcolor = \color{lightgray}]
 $endif$
 $if(lhs)$
-\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily,backgroundcolor=\color{lightgray}}}{}
 $endif$
 $if(highlighting-macros)$
 $highlighting-macros$

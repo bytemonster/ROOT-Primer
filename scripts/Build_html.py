@@ -156,9 +156,10 @@ for header in headers:
 		header.contents[0].replace_with(header.contents[0].replace('\n      ',''))
 		header.a.contents[0].replace_with(header.a.contents[0].replace('\n      ',''))
 		header.contents.remove(unicode('\n'))
-		miao = header
-		miao.name = 'h1'
-		possitions.append([position,[str(miao)]])
+		header_dup = soup.h1
+		header_dup.contents = header.contents
+		header_dup.a.contents = header.a.contents
+		possitions.append([position,[str(header_dup)]])
 current_level = 0
 buff = []
 i = len(possitions)

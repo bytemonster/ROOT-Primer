@@ -7,6 +7,8 @@ get_abs_filename() {
   echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
 }
 
+. /build/workspace/root-makedoc-v608/rootspi/rdoc/src/v6-08-00-patches.build/bin/thisroot.sh
+
 CURRENTPOS=$(pwd)
 BASEDIR=$(cd $(dirname $BASH_SOURCE);pwd)
 NBDIR=$BASEDIR/../notebooks
@@ -32,8 +34,9 @@ if [ "$2" = "pdf" ] || [ "$2" = "all" ]
 then
 cat > mytemplate.tpl<< EOF
 {% extends 'display_priority.tpl' %}
-{% block in_prompt %}
-{% endblock in_prompt %}
+
+
+{% block in_prompt %}{% endblock in_prompt %}
 
 {% block output_prompt %}
 {%- endblock output_prompt %}
@@ -41,7 +44,7 @@ cat > mytemplate.tpl<< EOF
 {% block input %}
 \`\`\`{% if nb.metadata.language_info %}{{ nb.metadata.language_info.name }}{% endif %}
 {{ cell.source}}
-\`\`\` 
+\`\`\`
 {% endblock input %}
 
 {% block error %}

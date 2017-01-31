@@ -3,6 +3,7 @@ import string
 import sys
 import json
 import StringIO
+import re
 
 try:
 	import nbformat
@@ -38,6 +39,8 @@ reright=0
 for cell in nb.cells:
   if cell["cell_type"] == "code":
     if cell["source"] == '%jsroot on':
+      offset = -1
+    elif cell["source"] == '%jsroot off':
       offset = -1
     else:
       # print cell.execution_count
@@ -79,6 +82,14 @@ for cell in nb.cells:
                 elif flag is "height":
                     height=item
                     flag = "none"
+        height_check=re.findall(r'\d+', height)
+        width_check=re.findall(r'\d+', width)
+        if int(height_check[0]) > 300:
+            height = "300px" 
+        if int(width_check[0]) > 400:
+            width = "400px" 
+        elif int(width_check[0]) < 400 and int(width_check[0]) > 100:
+            width = "100px" 
         cells_new.append(new_markdown_cell(
         source="\\begin{figure} \n \centering \includegraphics[width=" + width +",height="+ height + "]{"+ src +"} \n \caption{" + alt +"} \n \end{figure}",
         metadata=cell.metadata))
