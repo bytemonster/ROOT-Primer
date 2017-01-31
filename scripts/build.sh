@@ -6,8 +6,9 @@ get_abs_filename() {
   # $1 : relative filename
   echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
 }
-
-. /build/workspace/root-makedoc-v608/rootspi/rdoc/src/v6-08-00-patches.build/bin/thisroot.sh
+git fetch
+git checkout origin/master notebooks/*
+git checkout origin/master data/*
 
 CURRENTPOS=$(pwd)
 BASEDIR=$(cd $(dirname $BASH_SOURCE);pwd)
@@ -34,9 +35,8 @@ if [ "$2" = "pdf" ] || [ "$2" = "all" ]
 then
 cat > mytemplate.tpl<< EOF
 {% extends 'display_priority.tpl' %}
-
-
-{% block in_prompt %}{% endblock in_prompt %}
+{% block in_prompt %}
+{% endblock in_prompt %}
 
 {% block output_prompt %}
 {%- endblock output_prompt %}
@@ -44,7 +44,7 @@ cat > mytemplate.tpl<< EOF
 {% block input %}
 \`\`\`{% if nb.metadata.language_info %}{{ nb.metadata.language_info.name }}{% endif %}
 {{ cell.source}}
-\`\`\`
+\`\`\` 
 {% endblock input %}
 
 {% block error %}
@@ -122,3 +122,7 @@ if [ "$2" != "html" ] && [ "$2" != "all" ] && [ "$2" != "pdf" ]
 then
 	echo "Wrong arguments. Accepted arguments are: 1rs argument location of output files - 2nd argument  pdf, html, all"
 fi
+
+rm -r notebooks
+rm -r data 
+git checkout dev
