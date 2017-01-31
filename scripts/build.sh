@@ -9,6 +9,10 @@ get_abs_filename() {
 
 . /build/workspace/root-makedoc-v608/rootspi/rdoc/src/v6-08-00-patches.build/bin/thisroot.sh
 
+git fetch
+git checkout origin/master -- notebooks/*
+git checkout origin/master -- data/*
+
 CURRENTPOS=$(pwd)
 BASEDIR=$(cd $(dirname $BASH_SOURCE);pwd)
 NBDIR=$BASEDIR/../notebooks
