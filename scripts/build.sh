@@ -7,12 +7,6 @@ get_abs_filename() {
   echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
 }
 
-. /build/workspace/root-makedoc-v608/rootspi/rdoc/src/v6-08-00-patches.build/bin/thisroot.sh
-
-git fetch
-git checkout origin/master -- notebooks/*
-git checkout origin/master -- data/*
-
 CURRENTPOS=$(pwd)
 BASEDIR=$(cd $(dirname $BASH_SOURCE);pwd)
 NBDIR=$BASEDIR/../notebooks
@@ -38,9 +32,8 @@ if [ "$2" = "pdf" ] || [ "$2" = "all" ]
 then
 cat > mytemplate.tpl<< EOF
 {% extends 'display_priority.tpl' %}
-
-
-{% block in_prompt %}{% endblock in_prompt %}
+{% block in_prompt %}
+{% endblock in_prompt %}
 
 {% block output_prompt %}
 {%- endblock output_prompt %}
@@ -48,7 +41,7 @@ cat > mytemplate.tpl<< EOF
 {% block input %}
 \`\`\`{% if nb.metadata.language_info %}{{ nb.metadata.language_info.name }}{% endif %}
 {{ cell.source}}
-\`\`\`
+\`\`\` 
 {% endblock input %}
 
 {% block error %}
@@ -115,7 +108,7 @@ EOF
 	done
 	rm mytemplate.tpl
 	cd $NBDIR
-	pandoc --toc --template=$BASEDIR/mdtemplate.tex $NBDIR/*_NOJS$NBEXTMD --latex-engine=pdflatex -o $NBDIR/ROOT-Primer_v0.pdf
+	pandoc --toc --template=$BASEDIR/mdtemplate.tex --highlight-style=tango $NBDIR/*_NOJS$NBEXTMD --latex-engine=pdflatex -o $NBDIR/ROOT-Primer_v0.pdf
 	pdftk frontpage.pdf $NBDIR/ROOT-Primer_v0.pdf output $NBDIR/ROOT-Primer.pdf
 	rm -rf *NOJS*
 	rm $NBDIR/ROOT-Primer_v0.pdf
